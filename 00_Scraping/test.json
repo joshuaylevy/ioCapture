@@ -754,7 +754,7 @@
                                                 "ce:indexed-name": "Henriques A."
                                             }
                                         ],
-                                        "et-al": "None"
+                                        "et-al": None
                                     },
                                     "ref-sourcetitle": "Fed. Res. Bull"
                                 },
@@ -2707,7 +2707,7 @@
                                                 "ce:indexed-name": "Ash S."
                                             }
                                         ],
-                                        "et-al": "None"
+                                        "et-al": None
                                     },
                                     "ref-sourcetitle": "Improving the Measurement of Consumer Expenditures"
                                 },
@@ -3055,17 +3055,17 @@
             "prism:publicationName": "Journal of Political Economy",
             "prism:pageRange": "3469-3519",
             "prism:endingPage": "3519",
-            "openaccessFlag": "None",
+            "openaccessFlag": None,
             "prism:doi": "10.1086/708815",
             "prism:startingPage": "3469",
             "dc:identifier": "SCOPUS_ID:85089156508",
             "dc:publisher": "University of Chicago Presssubscriptions@press.uchicago.edu"
         },
-        "idxterms": "None",
+        "idxterms": None,
         "language": {
             "@xml:lang": "eng"
         },
-        "authkeywords": "None",
+        "authkeywords": None,
         "subject-areas": {
             "subject-area": [
                 {
