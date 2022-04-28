@@ -1,0 +1,164 @@
+\documentclass[11pt, letterpaper, twoside]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fancyhdr}
+\usepackage[margin=1in, include foot]{geometry}
+\usepackage{ragged2e}
+\usepackage[]{hyperref}
+\usepackage{apacite}
+\usepackage{setspace}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{etoolbox}
+\usepackage{graphicx}
+\usepackage{amsmath, amssymb}
+\usepackage{cleveref}
+\usepackage{wrapfig}
+\usepackage{afterpage}
+\usepackage{floatrow}
+\usepackage{tikz}
+\usepackage{booktabs}
+\usepackage{siunitx}
+\usepackage{dcolumn}
+\usepackage{pdflscape}
+\usepackage{adjustbox}
+
+
+\setlength{\parindent}{0pt}
+\floatsetup[table]{capposition=top}
+
+\title{\singlespacing\textbf{Capture of the Academic Industrial Organization Literature}}
+
+
+\author{ 
+    Joshua Y. Levy \thanks{Joshua Y. Levy  (joshua.levy@chicagobooth.edu), Stigler Center, Booth School of Business, University of Chicago}}
+\date{\today}
+
+\onehalfspacing
+\begin{document}
+\begin{titlepage}
+    \maketitle
+    \thispagestyle{empty}
+\end{titlepage}
+
+
+\newpage
+\pagenumbering{arabic}
+
+
+\section{The Production of Academic Articles}
+
+\input{tex_tables/top5_publications_by_year.tex}
+\begin{figure}
+    \begin{subfigure}[!htbp]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{top_5_over_time_col.png}
+        \caption{By count}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[!htbp]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{top_5_over_time_col_shares.png}
+        \caption{By share}
+    \end{subfigure}
+    \begin{subfigure}[!htbp]{\textwidth}
+        \centering
+        \includegraphics[width=0.5\textwidth]{top5_over_time.png}
+        \caption{By count}
+    \end{subfigure}
+\end{figure}
+
+
+
+\section{The Role of Industrial Organization}
+
+These figures use exclusively LXX codes to determine Industrial Organization. (See appendix for more expansive definitions of IO)
+
+\begin{figure}
+    \begin{subfigure}[!htbp]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{LXX-code-share-area.png}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[!htbp]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{LXX-code-share-area-normalized.png}
+    \end{subfigure}
+\end{figure}
+
+
+\begin{figure}
+    \begin{subfigure}[!htbp]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{LXX-code-share-area-by-journal.png}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[!htbp]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{LXX-code-share-area-normalized-by-journal.png}
+    \end{subfigure}
+\end{figure}
+
+\newpage
+
+\section{The Role of Anti-Trust}
+
+\begin{figure}
+    \begin{subfigure}[!htbp]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{L4-vs-LXX.png}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[!htbp]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{L4-vs-LXX-normalized.png}
+    \end{subfigure}
+\end{figure}
+
+
+\begin{figure}
+    \begin{subfigure}[!htbp]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{L4-vs-LXX-by-journal.png}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[!htbp]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{L4-vs-LXX-normalized-by_journal.png}
+    \end{subfigure}
+\end{figure}
+
+
+
+\newpage
+
+\begin{table}[!htbp] \centering 
+    \caption{} 
+    \label{} 
+
+    \begin{adjustbox}{max width=\textwidth}
+        \begin{tabular}{@{\extracolsep{5pt}} ccccccccccc} 
+            \\[-1.8ex]\hline 
+            \hline \\[-1.8ex]
+            & \multicolumn{6}{c}{\textit{Abstract contains:}} & \multicolumn{4}{c}{\textit{JEL Code}} \\ 
+          \cline{2-7} \cline{8-11} \\
+            Publication & Anti Trust & Market Power & Anti Competitive & Monopoly & Merger & Cartel & L & K & L4 & K21 \\ 
+            \hline \\[-1.8ex] 
+            AER & 11 & 25 & 6 & 52 & 30 & 15 & 869 & 216 & 43 & 24 \\ 
+            ECA & 1 & 8 & 1 & 22 & 4 & 3 & 154 & 20 & 1 & 7 \\ 
+            JPE & 5 & 16 & 1 & 27 & 7 & 5 & 279 & 78 & 12 & 7 \\ 
+            QJE & 1 & 12 & 1 & 25 & 8 & 0 & 239 & 60 & 4 & 0 \\ 
+            RES & 2 & 9 & 1 & 52 & 5 & 2 & 228 & 39 & 3 & 1 \\ 
+            RJE & 21 & 37 & 13 & 113 & 48 & 16 & 679 & 87 & 43 & 15 \\ 
+            TOTAL & 41 & 107 & 23 & 291 & 102 & 41 & 2448 & 500 & 106 & 54 \\ 
+            \hline \\[-1.8ex] 
+        \end{tabular} 
+
+          
+    \end{adjustbox}
+    
+\end{table} 
+
+
+
+\end{document}

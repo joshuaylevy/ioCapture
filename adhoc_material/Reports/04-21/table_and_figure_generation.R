@@ -1,3 +1,4 @@
+### PREAMBLE
 library(tidyverse)
 library(stargazer)
 
@@ -9,6 +10,8 @@ setwd('ioCapture')
 adhoc_path <- 'adhoc_material/Reports/04-21/'
 
 
+
+#### General indicators
 df <- read_csv('00_Scraping/indicator_count_df.csv')
 
 df <- df %>%
@@ -25,7 +28,7 @@ ggplot(df %>%
   ylab('Articles')+
   scale_color_discrete(name='Publication')+
   theme_minimal()
-ggsave(filename=paste(adhoc_path, 'marketpower_count.png'), plot=last_plot())
+ggsave(filename=paste0(adhoc_path, 'marketpower_count.png'), plot=last_plot())
 
 ggplot(df %>%
          group_by(year, publication) %>%
@@ -37,7 +40,7 @@ ggplot(df %>%
   ylab('Articles')+
   scale_color_discrete(name='Publication')+
   theme_minimal()
-ggsave(filename=paste(adhoc_path, 'antitrust_count.png'), plot=last_plot())
+ggsave(filename=paste0(adhoc_path, 'antitrust_count.png'), plot=last_plot())
 
 
 ggplot(df %>%
@@ -47,7 +50,7 @@ ggplot(df %>%
   ggtitle('KXX-Code share by journal')+
   ylab('Share of articles with a KXX code')+
   theme_minimal()
-ggsave(filename=paste(adhoc_path, 'KXX_code_share.png'), plot=last_plot())
+ggsave(filename=paste0(adhoc_path, 'KXX_code_share.png'), plot=last_plot())
 
 ggplot(df %>%
          mutate(publication = toupper(publication)))+
@@ -56,9 +59,112 @@ ggplot(df %>%
   ggtitle('LXX-Code share by journal')+
   ylab('Share of articles with a LXX code')+
   theme_minimal()
-ggsave(filename=paste(adhoc_path, 'LXX_code_share.png'), plot=last_plot())
+ggsave(filename=paste0(adhoc_path, 'LXX_code_share.png'), plot=last_plot())
 
 
+ggplot(df %>%
+         mutate(publication=toupper(publication))%>%
+         group_by(year) %>%
+         mutate(L_code = sum(L_code),
+                count = sum(count)) %>%
+         select(year, L_code, count) %>%
+         distinct(year, .keep_all=TRUE)%>%
+         pivot_longer(!c(year), names_to='indicator', values_to='count'))+
+  geom_area(aes(x=year, y=count, group=indicator, fill=indicator, color=indicator),
+            position=position_stack(reverse=TRUE))+
+  scale_fill_discrete(breaks=c('count',
+                               'L_code'),
+                      labels=c('Top 5 (and RAND)',
+                               'Industrial Organization (LXX)'),
+                      direction=-1,
+                      name='Type:')+
+  scale_color_discrete(guide='none',
+                       direction=-1)+
+  labs(title='IO vs Top 5 (and RAND) Publications')+
+  ylab('Articles')+
+  theme_minimal()
+ggsave(filename=paste0(adhoc_path, 'LXX-code-share-area.png'), plot=last_plot())
+
+ggplot(df %>%
+         mutate(publication=toupper(publication))%>%
+         group_by(year) %>%
+         mutate(L_code = sum(L_code),
+                count = sum(count)) %>%
+         select(year, L_code, count) %>%
+         distinct(year, .keep_all=TRUE)%>%
+         pivot_longer(!c(year), names_to='indicator', values_to='count'))+
+  geom_area(aes(x=year, y=count, group=indicator, fill=indicator, color=indicator),
+            position=position_fill(reverse=TRUE))+
+  scale_fill_discrete(breaks=c('count',
+                               'L_code'),
+                      labels=c('Top 5 (and RAND)',
+                               'Industrial Organization (LXX)'),
+                      direction=-1,
+                      name='Type:')+
+  scale_color_discrete(guide='none',
+                       direction=-1)+
+  labs(title='IO as a share of Top 5 (and RAND) Publications')+
+  ylab('Share')+
+  theme_minimal()
+ggsave(filename=paste0(adhoc_path, 'LXX-code-share-area-normalized.png'), plot=last_plot())
+
+
+ggplot(df %>%
+         mutate(publication=toupper(publication))%>%
+         group_by(year, publication) %>%
+         mutate(L_code = sum(L_code),
+                count = sum(count)) %>%
+         select(year, L_code, count, publication) %>%
+         distinct(year, .keep_all=TRUE)%>%
+         pivot_longer(!c(year, publication), names_to='indicator', values_to='count'))+
+  geom_area(aes(x=year, y=count, group=indicator, fill=indicator, color=indicator),
+            position=position_stack(reverse=TRUE))+
+  scale_fill_discrete(breaks=c('count',
+                               'L_code'),
+                      labels=c('Top 5 (and RAND)',
+                               'Industrial Organization (LXX)'),
+                      direction=-1,
+                      name='Type:')+
+  scale_color_discrete(guide='none',
+                       direction=-1)+
+  labs(title='IO vs Top 5 (and RAND) Publications, by journal')+
+  ylab('Articles')+
+  theme_minimal()+
+  facet_wrap('publication')
+ggsave(filename=paste0(adhoc_path, 'LXX-code-share-area-by-journal.png'), plot=last_plot())
+
+
+ggplot(df %>%
+         mutate(publication=toupper(publication))%>%
+         group_by(year, publication) %>%
+         mutate(L_code = sum(L_code),
+                count = sum(count)) %>%
+         select(year, L_code, count, publication) %>%
+         distinct(year, .keep_all=TRUE)%>%
+         view()%>%
+         pivot_longer(!c(year, publication), names_to='indicator', values_to='count'))+
+  geom_area(aes(x=year, y=count, group=indicator, fill=indicator, color=indicator),
+            position=position_fill(reverse=TRUE))+
+  scale_fill_discrete(breaks=c('count',
+                               'L_code'),
+                      labels=c('Top 5 (and RAND)',
+                               'Industrial Organization (LXX)'),
+                      direction=-1,
+                      name='Type:')+
+  scale_color_discrete(guide='none',
+                       direction=-1)+
+  labs(title='IO as a share of Top 5 (and RAND) Publications, by journal')+
+  ylab('Share')+
+  theme_minimal()+
+  facet_wrap('publication')
+ggsave(filename=paste0(adhoc_path, 'LXX-code-share-area-normalized-by-journal.png'), plot=last_plot())
+
+
+
+
+
+
+#### SPECIFIC INDICATORS
 
 indicators_df <- read_csv('adhoc_material/Reports/04-21/L_papers_indicators.csv') %>%
   mutate(publication = toupper(publication)) %>%
@@ -121,7 +227,7 @@ ggplot(indicators_count_df %>%
        caption = 'Note: Articles can mention more than one LX code, so the publication-year count may exceed the number of L-code articles')+
   ylab('Articles')+
   facet_wrap('publication')
-ggsave(filename=paste(adhoc_path, 'LX-breakdown-count-by-journal.png'), plot=last_plot())
+ggsave(filename=paste0(adhoc_path, 'LX-breakdown-count-by-journal.png'), plot=last_plot())
 
 #LX codes by year (COUNT)
 ggplot(indicators_count_df %>%
@@ -156,7 +262,7 @@ ggplot(indicators_count_df %>%
   labs(title = 'Number of articles labelled with LX JEL Codes',
        caption = 'Note: Articles can mention more than one LX code, so the publication-year count may exceed the number of L-code articles')+
   ylab('Articles')
-ggsave(filename=paste(adhoc_path, 'LX-breakdown-count.png'), plot=last_plot())
+ggsave(filename=paste0(adhoc_path, 'LX-breakdown-count.png'), plot=last_plot())
 
 
 #ANTI-TRUST IN ABSTRACT by year (COUNT)
@@ -186,7 +292,7 @@ ggplot(indicators_count_df %>%
   labs(title = 'Number of articles that mention "anti-trust" in the abstract',
        caption = 'Note: Articles without an LX code can still mention antitrust in an abstract, so total counts may not be accurate')+
   ylab('Aritlces')
-ggsave(filename=paste(adhoc_path, 'anti-trust-in-abstract.png'), plot=last_plot())
+ggsave(filename=paste0(adhoc_path, 'anti-trust-in-abstract.png'), plot=last_plot())
 
 
 #ANTI-TRUST IN ABSTRACT by year (COUNT)
@@ -214,7 +320,7 @@ ggplot(indicators_count_df %>%
   facet_wrap('publication')+
   labs(title = 'Number of articles that mention "anti trust" in the abstract',
        caption = 'Note: Articles without an LX code can still mention antitrust in an abstract, so total counts may not be accurate')
-ggsave(filename=paste(adhoc_path, 'anti-trust-in-abstract-by-journal.png'), plot=last_plot())
+ggsave(filename=paste0(adhoc_path, 'anti-trust-in-abstract-by-journal.png'), plot=last_plot())
 
 
 ggplot(indicators_count_df %>%
@@ -240,7 +346,38 @@ ggplot(indicators_count_df %>%
                        direction=-1)+
   ylab('Articles')+
   theme_minimal()
-ggsave(filename=paste(adhoc_path, 'L4-vs-LXX.png'), plot=last_plot())
+ggsave(filename=paste0(adhoc_path, 'L4-vs-LXX.png'), plot=last_plot())
+
+
+
+ggplot(indicators_count_df %>%
+         filter(indicator %in% c('L4_code')) %>%
+         group_by(year)%>%
+         mutate(count=sum(count),
+                L_code_count=sum(L_code_count)) %>%
+         mutate(L4_indicator_count = ifelse(indicator == 'L4_code', count, 0),
+                L_code_less_L4 = L_code_count - L4_indicator_count) %>%
+         select(-c('indicator', 'count')) %>%
+         distinct(year, .keep_all = TRUE) %>%
+         pivot_longer(!c(publication, year, L_code_count), names_to='indicator', values_to='count'))+
+  geom_area(aes(x=year, y=count, group=indicator, fill=indicator, color=indicator),
+            position=position_fill(reverse=TRUE))+
+  labs(title='Share of LX articles that are L4 (antitrust issues and policies)')+
+  scale_fill_discrete(breaks=c('L_code_less_L4',
+                               'L4_indicator_count'),
+                      labels=c('LXX articles',
+                               'L4 articles'),
+                      name="Type:",
+                      direction=-1)+
+  scale_color_discrete(guide="none",
+                       direction=-1)+
+  ylab('Articles')+
+  theme_minimal()
+ggsave(filename=paste0(adhoc_path, 'L4-vs-LXX-normalized.png'), plot=last_plot())
+
+
+
+
 
 ggplot(indicators_count_df %>%
          filter(indicator %in% c('L4_code', 'L_code')) %>%
@@ -265,7 +402,83 @@ ggplot(indicators_count_df %>%
   ylab('Articles')+
   theme_minimal()+
   facet_wrap('publication')
-ggsave(filename=paste(adhoc_path, 'L4-vs-LXX-by_journal.png'), plot=last_plot())
+ggsave(filename=paste0(adhoc_path, 'L4-vs-LXX-by_journal.png'), plot=last_plot())
+
+
+ggplot(indicators_count_df %>%
+         filter(indicator %in% c('L4_code', 'L_code')) %>%
+         ungroup() %>%
+         group_by(year, publication) %>%
+         mutate(L4_indicator_count = ifelse(indicator == 'L4_code', count, 0),
+                L_code_less_L4 = L_code_count - L4_indicator_count) %>%
+         select(-c('L_code_count', 'indicator', 'count'))%>%
+         pivot_longer(!c('publication', 'year'), names_to='indicator', values_to='count')%>%
+         distinct(publication, year, indicator, .keep_all = TRUE))+
+  geom_area(aes(x=year, y=count, group=indicator, fill=indicator, color=indicator),
+            position=position_fill(reverse=TRUE))+
+  scale_fill_discrete(breaks=c('L_code_less_L4',
+                               'L4_indicator_count'),
+                      labels=c('LXX articles',
+                               'L4 articles'),
+                      name="Type:",
+                      direction=-1)+
+  scale_color_discrete(guide="none",
+                       direction=-1)+
+  labs(title='Share of LX articles that are L4 (antitrust issues and policies), by journal')+
+  ylab('Articles')+
+  theme_minimal()+
+  facet_wrap('publication')
+ggsave(filename=paste0(adhoc_path, 'L4-vs-LXX-normalized-by_journal.png'), plot=last_plot())
+
+
+
+ggplot(df %>%
+         select(year, publication, L4_code, count)%>%
+         group_by(year) %>%
+         mutate(publication=toupper(publication),
+                L4_code = sum(L4_code),
+                count = sum(count)) %>%
+         distinct(year, .keep_all=TRUE) %>%
+         pivot_longer(!c(year, publication), names_to='indicator', values_to='count'))+
+  geom_area(aes(x=year, y=count, group=indicator, color=indicator, fill=indicator),
+            position=position_stack(reverse=TRUE))+
+  scale_fill_discrete(breaks=c('count',
+                               'L4_code'),
+                      labels=c('Top 5',
+                               'L4 (antitrust issues and policies)'),
+                      name='Type:',
+                      direction=-1)+
+  scale_color_discrete(guide='none',
+                       direction=-1)+
+  theme_minimal()
+
+
+ggplot(df %>%
+         select(year, publication, L4_code, count)%>%
+         group_by(year) %>%
+         mutate(publication=toupper(publication),
+                L4_code = sum(L4_code),
+                count = sum(count)) %>%
+         distinct(year, .keep_all=TRUE) %>%
+         pivot_longer(!c(year, publication), names_to='indicator', values_to='count'))+
+  geom_area(aes(x=year, y=count, group=indicator, color=indicator, fill=indicator),
+            position=position_fill(reverse=TRUE))+
+  scale_fill_discrete(breaks=c('count',
+                               'L4_code'),
+                      labels=c('Top 5',
+                               'L4 (antitrust issues and policies)'),
+                      name='Type:',
+                      direction=-1)+
+  scale_color_discrete(guide='none',
+                       direction=-1)+
+  theme_minimal()
+
+
+
+
+
+
+
 
 
 ggplot(indicators_count_df %>%
@@ -291,7 +504,7 @@ ggplot(indicators_count_df %>%
        caption='*Theory codes include: C7, D11, D5, D21, D85, and D86')+
   ylab('Articles')+
   theme_minimal()
-ggsave(filename=paste(adhoc_path, "theory-vs-LXX.png"), plot=last_plot())
+ggsave(filename=paste0(adhoc_path, "theory-vs-LXX.png"), plot=last_plot())
 
 
 ggplot(indicators_count_df %>%
@@ -315,7 +528,7 @@ ggplot(indicators_count_df %>%
   ylab('Articles')+
   theme_minimal()+
   facet_wrap('publication')
-ggsave(filename=paste(adhoc_path, 'theory-vs-LXX-by-journal.png'), plot=last_plot())
+ggsave(filename=paste0(adhoc_path, 'theory-vs-LXX-by-journal.png'), plot=last_plot())
 
 
 
@@ -359,7 +572,7 @@ ggplot(indicators_df %>%
        subtitle='Normalized to 1991')+
   ylab('L4 vs LXX share')+
   theme_minimal()
-ggsave(filename=paste(adhoc_path, 'L4-vs-LXX-share-by-year-normalized'), plot=last_plot())
+ggsave(filename=paste0(adhoc_path, 'L4-vs-LXX-share-by-year-normalized'), plot=last_plot())
 
 
 ggplot(indicators_df %>%
@@ -381,16 +594,77 @@ ggplot(indicators_df %>%
                       labels=c('L40: General',
                                'L41: Monopolization; Horizontal anticompetitive practices',
                                'L42: Vertical restraints; Resale price maintenance; Quantity discounts',
-                               'L43: Legal monopoloes and regulation or deregulation',
+                               'L43: Legal monopolies and regulation or deregulation',
                                'L44: Antitrust policy and public enterprises, nonprofit institutions, and professional organizations',
                                'L49: Other'),
                       name='L4 (Antitrust Issues and Policies) Type:'
                       )+
   scale_color_discrete(guide='none')+
   theme_minimal()
-ggsave(filename=paste(adhoc_path, 'L4-breakdown-count.png'), plot=last_plot())
+ggsave(filename=paste0(adhoc_path, 'L4-breakdown-count.png'), plot=last_plot())
   
 
+
+
+
+
+publications_year_df <- read_csv('adhoc_material/Reports/04-21/publications_year.csv')
+
+top5_year_df <- publications_year_df %>%
+  group_by(year) %>%
+  mutate(count = sum(count)) %>%
+  ungroup()%>%
+  distinct(year, count, .keep_all = TRUE)
+
+ggplot(publications_year_df %>%
+         mutate(publication = toupper(publication)))+
+  geom_col(aes(x=year, y=count, color=publication, fill=publication))+
+  scale_fill_discrete(name='Publication')+
+  scale_color_discrete(guide='none')+
+  labs(title='Top 5 (and RAND) publications over time')+
+  ylab('Articles')+
+  theme_minimal()
+ggsave(filename=paste0(adhoc_path, 'top_5_over_time_col.png'), plot=last_plot())
+
+ggplot(publications_year_df %>%
+         mutate(publication = toupper(publication)))+
+  geom_col(aes(x=year, y=count, color=publication, fill=publication), position='fill')+
+  scale_fill_discrete(name='Publication')+
+  scale_color_discrete(guide='none')+
+  labs(title='Top 5 (and RAND) publication shares over time')+
+  ylab('Articles')+
+  theme_minimal()
+ggsave(filename=paste0(adhoc_path, 'top_5_over_time_col_shares.png'), plot=last_plot())
+
+ggplot(publications_year_df %>%
+         mutate(publication = toupper(publication)))+
+  geom_line(aes(x=year, y=count, color=publication), size=1.25)+
+  scale_color_discrete(name='Publication')+
+  labs(title="Top 5 (and RAND) publications over time")+
+  ylab('Articles')+
+  theme_minimal()
+ggsave(filename=paste0(adhoc_path, 'top5_over_time.png'), plot=last_plot())
+
+publications_year_df_wide <- publications_year_df %>%
+  mutate(publication = toupper(publication)) %>%
+  pivot_wider(names_from='publication', values_from='count')%>%
+  group_by(year)%>%
+  rename('Year'= 'year') %>% 
+  mutate(TOTAL = sum(AER, ECA, JPE, QJE, RES, RJE))
+stargazer(publications_year_df_wide %>% column_to_rownames(var='Year'),
+          rownames=TRUE,
+          font.size='footnotesize',
+          summary=FALSE,
+          out=paste00(adhoc_path, 'tex_tables/top5_publications_by_year.tex'))
+
+
+
+
+
+
+ggplot(top5_year_df)+
+  geom_col(aes(x=year, y=count))+
+  theme_minimal()
 
 
 
