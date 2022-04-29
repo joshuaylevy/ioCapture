@@ -69,7 +69,8 @@ ggplot(df %>%
                 count = sum(count)) %>%
          select(year, L_code, count) %>%
          distinct(year, .keep_all=TRUE)%>%
-         pivot_longer(!c(year), names_to='indicator', values_to='count'))+
+         pivot_longer(!c(year), names_to='indicator', values_to='count')%>%
+         view())+
   geom_area(aes(x=year, y=count, group=indicator, fill=indicator, color=indicator),
             position=position_stack(reverse=TRUE))+
   scale_fill_discrete(breaks=c('count',
@@ -84,6 +85,27 @@ ggplot(df %>%
   ylab('Articles')+
   theme_minimal()
 ggsave(filename=paste0(adhoc_path, 'LXX-code-share-area.png'), plot=last_plot())
+
+library(sjmisc)
+df %>%
+  mutate(publication=toupper(publication))%>%
+  group_by(year) %>%
+  mutate(L_code = sum(L_code),
+         count = sum(count)) %>%
+  select(year, L_code, count) %>%
+  distinct(year, .keep_all=TRUE)%>%
+  ungroup() %>%
+  mutate(share = L_code/count) %>%
+  column_to_rownames('year') %>%
+  rename('Top 5 (and RAND)' = 'count',
+         'IO (LXX)' = 'L_code',
+         'IO Share' = 'share') %>%
+  rotate_df() %>%
+  view()
+
+
+
+
 
 ggplot(df %>%
          mutate(publication=toupper(publication))%>%
@@ -231,6 +253,7 @@ ggplot(df %>%
   labs(title='Top 5, J3 (wages) and L4 (anti-trust) articles')+
   ylab('Articles')+
   theme_minimal()
+ggsave(filename=paste0(adhoc_path, 'j3-l4-top5.png'), plot=last_plot())
 
 
 
@@ -258,6 +281,8 @@ ggplot(df %>%
   labs(title='Top 5, J3 (wages) and L4 (anti-trust) articles')+
   ylab('Articles')+
   theme_minimal()
+ggsave(filename=paste0(adhoc_path, 'j3-l4-top5-normalized.png'), plot=last_plot())
+
 
 
 

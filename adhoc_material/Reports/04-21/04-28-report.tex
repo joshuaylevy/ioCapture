@@ -47,53 +47,63 @@
 
 
 \section{The Production of Academic Articles}
-
-\input{tex_tables/top5_publications_by_year.tex}
-\begin{figure}
-    \begin{subfigure}[!htbp]{0.49\textwidth}
+Between 1991 and 2020, the amount of space for articles in the Top 5 journals, the \textit{American Economic Review} (AER), \textit{Econometrica} (ECA), the \textit{Journal of Political Economy} (JPE), the \textit{Quarterly Journal of Economics} (QJE), and the \textit{Review of Economic Studies} (RES) (and the \textit{RAND Journal of Economics} (RJE)) has grown slowly and steadily. Notably, however the AER makes up some 40\% of articles published in the Top 5, with almost double the number of articles that any other journal published in any given year.\\
+\begin{figure}[h]
+    \caption{Annual publications in the Top 5 (and RAND)}
+    \begin{subfigure}[h]{0.49\textwidth}
         \centering
         \includegraphics[width=\textwidth]{top_5_over_time_col.png}
         \caption{By count}
     \end{subfigure}
     \hfill
-    \begin{subfigure}[!htbp]{0.49\textwidth}
+    \begin{subfigure}[h]{0.49\textwidth}
         \centering
         \includegraphics[width=\textwidth]{top_5_over_time_col_shares.png}
         \caption{By share}
     \end{subfigure}
-    \begin{subfigure}[!htbp]{\textwidth}
+    \begin{subfigure}[h]{\textwidth}
         \centering
         \includegraphics[width=0.5\textwidth]{top5_over_time.png}
         \caption{By count}
     \end{subfigure}
 \end{figure}
 
+Though there has been some fluctuation over time, the Top 5 (and RAND) collectively published between 390 and 600 articles per year, with an average of 471 publications per year between 1990 and 2021.\footnote{Note that 2021 may bias this average downwards as not all articles may have yet been indexed by EconLit. Hereafter, we trim all data data to consider only the period from 1991 to 2020.} See Appendix A for a full table of annual publication figures.
+
+
 
 
 \section{The Role of Industrial Organization}
+We then consider how Industrial Organization (IO) papers have featured in the Top 5 and RAND over time. We consider a paper to be an ``IO'' publication if the article's associated Journal of Economic Literature (JEL) codes contains \textit{at least} one code that begins with ``L,'' hereafter regularly referred to as LXX. (JEL codes since 1990 have been a letter followed by two numbers, each indicating a greater degree of topic-specificity.) There are other JEL codes which could ostensibly be considered IO-related. These include K21 (Antitrust law), D4 (Market structure, pricing, and design), O3 (Innovation; research and development; technological change; intellectual property rights), and G34 (Mergers; acquisitions; restructuring; corporate governance). However, these are omitted at first to make comparisons (see subsection INSERT NUMBER HERE) across various topics/groups easier. For figures representing a broader definition of IO see appendix INSERT LETTER HERE.\\
+
+
+During the the period from 1990 to 2020, IO papers have made up, on average, approximately 16\% of articles published in the Top 5 (and RAND). This share has grown steadily over time, with the greatest share of such articles having been published in 2020 (20.8\%).\footnote{See Appendix INSERT LETTER HERE for a full table of annual IO share figures.} This pattern, however, is not agnostic to journal. That is AER and QJE, publish lots of IO papers relative to, for example, \textit{Econometrica}. Additionally, as a field journal, \textit{RAND} regularly sees almost 40\% its publications mention at least one LXX JEL code.
 
 These figures use exclusively LXX codes to determine Industrial Organization. (See appendix for more expansive definitions of IO)
 
-\begin{figure}
-    \begin{subfigure}[!htbp]{0.49\textwidth}
+\begin{figure}[h]
+    \caption{The share of Top 5 (and RAND) articles that are IO related (LXX)}
+    \begin{subfigure}[h]{0.49\textwidth}
         \centering
         \includegraphics[width=\textwidth]{LXX-code-share-area.png}
+        \caption{By count}
     \end{subfigure}
     \hfill
-    \begin{subfigure}[!htbp]{0.49\textwidth}
+    \begin{subfigure}[h]{0.49\textwidth}
         \centering
         \includegraphics[width=\textwidth]{LXX-code-share-area-normalized.png}
+        \caption*{By share}
     \end{subfigure}
 \end{figure}
 
 
 \begin{figure}
-    \begin{subfigure}[!htbp]{0.49\textwidth}
+    \begin{subfigure}[h]{0.49\textwidth}
         \centering
         \includegraphics[width=\textwidth]{LXX-code-share-area-by-journal.png}
     \end{subfigure}
     \hfill
-    \begin{subfigure}[!htbp]{0.49\textwidth}
+    \begin{subfigure}[h]{0.49\textwidth}
         \centering
         \includegraphics[width=\textwidth]{LXX-code-share-area-normalized-by-journal.png}
     \end{subfigure}
@@ -104,12 +114,12 @@ These figures use exclusively LXX codes to determine Industrial Organization. (S
 \section{The Role of Anti-Trust}
 
 \begin{figure}
-    \begin{subfigure}[!htbp]{0.49\textwidth}
+    \begin{subfigure}[h]{0.49\textwidth}
         \centering
         \includegraphics[width=\textwidth]{L4-vs-LXX.png}
     \end{subfigure}
     \hfill
-    \begin{subfigure}[!htbp]{0.49\textwidth}
+    \begin{subfigure}[h]{0.49\textwidth}
         \centering
         \includegraphics[width=\textwidth]{L4-vs-LXX-normalized.png}
     \end{subfigure}
@@ -117,25 +127,48 @@ These figures use exclusively LXX codes to determine Industrial Organization. (S
 
 
 \begin{figure}
-    \begin{subfigure}[!htbp]{0.49\textwidth}
+    \begin{subfigure}[h]{0.49\textwidth}
         \centering
         \includegraphics[width=\textwidth]{L4-vs-LXX-by-journal.png}
     \end{subfigure}
     \hfill
-    \begin{subfigure}[!htbp]{0.49\textwidth}
+    \begin{subfigure}[h]{0.49\textwidth}
         \centering
         \includegraphics[width=\textwidth]{L4-vs-LXX-normalized-by_journal.png}
     \end{subfigure}
 \end{figure}
 
+\subsection{Anti-Trust relative to Wages}
+
+\begin{figure}
+    \begin{subfigure}[h]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{j3-l4-top5.png}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[h]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{j3-l4-top5-normalized.png}
+    \end{subfigure}
+\end{figure}
+
+
+
+\appendix
+\section{The Production of Academic Articles}
+\input{tex_tables/top5_publications_by_year.tex}
+
+\section{The Role of Industrial Organization}
+\input{tex_tables/io_share_by_year.tex}
+
+\input{tex_tables/io_share_journal_by_year.tex}
 
 
 \newpage
 
-\begin{table}[!htbp] \centering 
+\begin{table}[h] \centering 
     \caption{} 
     \label{} 
-
     \begin{adjustbox}{max width=\textwidth}
         \begin{tabular}{@{\extracolsep{5pt}} ccccccccccc} 
             \\[-1.8ex]\hline 
@@ -152,11 +185,8 @@ These figures use exclusively LXX codes to determine Industrial Organization. (S
             RJE & 21 & 37 & 13 & 113 & 48 & 16 & 679 & 87 & 43 & 15 \\ 
             TOTAL & 41 & 107 & 23 & 291 & 102 & 41 & 2448 & 500 & 106 & 54 \\ 
             \hline \\[-1.8ex] 
-        \end{tabular} 
-
-          
+        \end{tabular}    
     \end{adjustbox}
-    
 \end{table} 
 
 
