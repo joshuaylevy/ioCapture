@@ -86,8 +86,9 @@ ggplot(df %>%
   theme_minimal()
 ggsave(filename=paste0(adhoc_path, 'LXX-code-share-area.png'), plot=last_plot())
 
-library(sjmisc)
-df %>%
+
+library(scales)
+io_share_table <- df %>%
   mutate(publication=toupper(publication))%>%
   group_by(year) %>%
   mutate(L_code = sum(L_code),
@@ -95,13 +96,17 @@ df %>%
   select(year, L_code, count) %>%
   distinct(year, .keep_all=TRUE)%>%
   ungroup() %>%
-  mutate(share = L_code/count) %>%
+  mutate(share = percent(L_code/count,
+                         accuracy=0.1)) %>%
   column_to_rownames('year') %>%
   rename('Top 5 (and RAND)' = 'count',
          'IO (LXX)' = 'L_code',
-         'IO Share' = 'share') %>%
-  rotate_df() %>%
-  view()
+         'IO Share' = 'share')
+stargazer(io_share_table,
+          summary=FALSE,
+          rownames=TRUE,
+          font.size='footnotesize',
+          out=paste0(adhoc_path, 'tex_tables/io_share_by_year.tex'))
 
 
 
@@ -154,6 +159,65 @@ ggplot(df %>%
   theme_minimal()+
   facet_wrap('publication')
 ggsave(filename=paste0(adhoc_path, 'LXX-code-share-area-by-journal.png'), plot=last_plot())
+
+io_share_journal_table <- df %>%
+  mutate(publication=toupper(publication))%>%
+  group_by(year, publication) %>%
+  mutate(L_code = sum(L_code),
+         count = sum(count)) %>%
+  select(year, L_code, count, publication) %>%
+  pivot_wider(names_from='publication',
+              values_from=c('count', 'L_code')) %>%
+  mutate(AER_io_share =  percent(L_code_AER / count_AER, accuracy=0.01),
+         ECA_io_share =  percent(L_code_ECA / count_ECA, accuracy=0.01),
+         JPE_io_share =  percent(L_code_JPE / count_JPE, accuracy=0.01),
+         QJE_io_share =  percent(L_code_QJE / count_QJE, accuracy=0.01),
+         RES_io_share =  percent(L_code_RES / count_RES, accuracy=0.01),
+         RJE_io_share =  percent(L_code_RJE / count_RJE, accuracy=0.01),
+         ) %>%
+  select(-c(L_code_AER,
+            L_code_ECA,
+            L_code_JPE,
+            L_code_QJE,
+            L_code_RES,
+            L_code_RJE,)) %>%
+  rename('AER IO Share' = 'AER_io_share',
+         'ECA IO Share' = 'ECA_io_share',
+         'JPE IO Share' = 'JPE_io_share',
+         'QJE IO Share' = 'QJE_io_share',
+         'RES IO Share' = 'RES_io_share',
+         'RJE IO Share' = 'RJE_io_share',
+         'AER' = 'count_AER',
+         'ECA' = 'count_ECA',
+         'JPE' = 'count_JPE',
+         'QJE' = 'count_QJE',
+         'RJE' = 'count_RJE',
+         'RES' = 'count_RES'
+         ) %>%
+  select(c('year',
+           'AER',
+           'AER IO Share',
+           'ECA',
+           'ECA IO Share',
+           'JPE',
+           'JPE IO Share',
+           'QJE',
+           'QJE IO Share',
+           'RES',
+           'RES IO Share',
+           'RJE',
+           'RJE IO Share',
+           )) %>%
+  column_to_rownames('year') %>%
+  view()
+
+stargazer(io_share_journal_table,
+          summary=FALSE,
+          rownames=TRUE,
+          font.size='footnotesize',
+          column.sep.width = '2pt',
+          out=paste0(adhoc_path, 'tex_tables/io_share_journal_by_year.tex'))
+
 
 
 ggplot(df %>%
@@ -872,11 +936,60 @@ stargazer(publications_year_df_wide %>% column_to_rownames(var='Year'),
 
 
 
+jel_normalized_df <- read_csv(paste0(adhoc_path, 'top_five_jel_breakdown.csv'))
+jel_normalized_unnested_df <- read_csv(paste0(adhoc_path, 'top_five_jel_unnested.csv'))
 
-ggplot(top5_year_df)+
-  geom_col(aes(x=year, y=count))+
+ggplot(jel_normalized_df %>%
+         filter(year %notin% c(1990, 2021)) %>%
+         na.omit() %>%
+         select(title, year, publication, predom_jel) %>%
+         group_by(year, publication) %>%
+         count(predom_jel) %>% 
+         rename('predom_jel_count'  = 'n') %>%
+         distinct(year, predom_jel, .keep_all = TRUE) %>%
+         view())+
+  geom_area(aes(x=year, y=predom_jel_count, group=predom_jel, color=predom_jel, fill=predom_jel))+
+  theme_minimal()+
+  facet_wrap('publication')
+
+
+
+ggplot(jel_normalized_df %>%
+         filter(year %notin% c(1990, 2021)) %>%
+         select(title, year, publication, predom_jel) %>%
+         group_by(year) %>%
+         count(predom_jel) %>% 
+         rename('predom_jel_count'  = 'n') %>%
+         distinct(year, predom_jel, .keep_all = TRUE))+
+  geom_area(aes(x=year, y=predom_jel_count, group=predom_jel, color='black', fill=predom_jel),
+            position=position_stack())+
   theme_minimal()
 
+
+ggplot(jel_normalized_unnested_df %>%
+         filter(year %notin% c(1990, 2021)) %>%
+         group_by(year, publication, jel_list_pre) %>%
+         mutate(weighted_jel_count = sum(jel_list_elem_weight)) %>%
+         distinct(year, publication, jel_list_pre, .keep_all = TRUE) %>%
+         select(publication, year, jel_list_pre, weighted_jel_count) %>%
+         rename('jel_alpha' = 'jel_list_pre')%>%
+         view())+
+  geom_area(aes(x=year, y=weighted_jel_count, group=jel_alpha, fill=jel_alpha, color=jel_alpha))+
+  theme_minimal()+
+  facet_wrap('publication')
+
+
+
+ggplot(jel_normalized_unnested_df %>%
+         filter(year %notin% c(1990, 2021)) %>%
+         group_by(year, jel_list_pre) %>%
+         mutate(weighted_jel_count = sum(jel_list_elem_weight)) %>%
+         distinct(year, jel_list_pre, .keep_all = TRUE) %>%
+         select(publication, year, jel_list_pre, weighted_jel_count) %>%
+         rename('jel_alpha' = 'jel_list_pre')%>%
+         view())+
+  geom_area(aes(x=year, y=weighted_jel_count, group=jel_alpha, fill=jel_alpha, color=jel_alpha))+
+  theme_minimal()
 
 
 
