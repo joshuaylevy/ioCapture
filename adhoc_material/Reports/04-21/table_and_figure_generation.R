@@ -9,6 +9,35 @@ setwd('ioCapture')
 
 adhoc_path <- 'adhoc_material/Reports/04-21/'
 
+code_col <- c('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','Y','Z'
+)
+
+desc_col <- c(
+  'General Economics and Teaching',
+  'History of Economic Through, Methodology and Heterodox Approaches',
+  'Mathematical and Quantitative Methods',
+  'Microeconomics',
+  'Macroeconomics and Monetary Economics',
+  'International Economics',
+  'Financial Economics',
+  'Public Economics',
+  'Health, Education, and Welfare',
+  'Labor and Demographic Economics',
+  'Law and Economics',
+  'Industrial Organization',
+  'Business Administratio and Business Economics; Marketing; Accounting; Personnel Economics',
+  'Economic History',
+  'Economic Development, Innovation, Technologicla Change, and Growth',
+  'Economic Systems',
+  'Agricultural and Natural Resource Econoimcs; Environmental and Ecological Economics',
+  'Urban, Rural, Regional, Real Estate, and Transportation Economics',
+  'Miscellaneous Categories',
+  'Other Special Topics'
+)
+
+
+jel_alpha_descriptions <- data.frame(desc_col, code_col)
+
 
 
 #### General indicators
@@ -954,7 +983,7 @@ ggplot(jel_normalized_df %>%
 
 
 
-ggplot(jel_normalized_df %>%
+  ggplot(jel_normalized_df %>%
          filter(year %notin% c(1990, 2021)) %>%
          select(title, year, publication, predom_jel) %>%
          group_by(year) %>%
