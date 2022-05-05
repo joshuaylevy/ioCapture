@@ -1,7 +1,7 @@
 ### PREAMBLE
 library(tidyverse)
 library(stargazer)
-
+library(pals)
 
 `%notin%` <- Negate(`%in%`)
 setwd('~')
@@ -970,21 +970,37 @@ jel_normalized_unnested_df <- read_csv(paste0(adhoc_path, 'top_five_jel_unnested
 
 ggplot(jel_normalized_df %>%
          filter(year %notin% c(1990, 2021)) %>%
+         mutate(publication = toupper(publication)) %>%
          na.omit() %>%
          select(title, year, publication, predom_jel) %>%
          group_by(year, publication) %>%
          count(predom_jel) %>% 
          rename('predom_jel_count'  = 'n') %>%
          distinct(year, predom_jel, .keep_all = TRUE) %>%
-         view())+
+         pivot_wider(names_from='year',
+                     values_from = 'predom_jel_count',
+                     values_fill = 0) %>%
+         pivot_longer(!c('publication', 'predom_jel'),
+                      names_to = 'year',
+                      values_to = 'predom_jel_count') %>%
+         mutate(year = as.numeric(year)))+
   geom_area(aes(x=year, y=predom_jel_count, group=predom_jel, color=predom_jel, fill=predom_jel))+
+  scale_fill_manual(values=unname(alphabet(n=length(unique(jel_normalized_df$predom_jel %>% na.omit())))),
+                    breaks = jel_alpha_descriptions$code_col,
+                    labels = jel_alpha_descriptions$desc_col,
+                    name='Predominant Category')+
+  scale_color_discrete(guide='none')+
+  labs(title='Distribution of topics (by JEL code) over time, by publication',
+       subtitle='Category determined by predominant category listed')+
   theme_minimal()+
   facet_wrap('publication')
+ggsave(paste0(adhoc_path, 'jel_predom_by_journal.png'), plot=last_plot(), height=8.5, width=11, units='in')
 
 
 
   ggplot(jel_normalized_df %>%
          filter(year %notin% c(1990, 2021)) %>%
+         na.omit() %>% 
          select(title, year, publication, predom_jel) %>%
          group_by(year) %>%
          count(predom_jel) %>% 
@@ -997,27 +1013,160 @@ ggplot(jel_normalized_df %>%
 
 ggplot(jel_normalized_unnested_df %>%
          filter(year %notin% c(1990, 2021)) %>%
+         mutate(publication = toupper(publication)) %>%
+         na.omit() %>% 
          group_by(year, publication, jel_list_pre) %>%
          mutate(weighted_jel_count = sum(jel_list_elem_weight)) %>%
          distinct(year, publication, jel_list_pre, .keep_all = TRUE) %>%
          select(publication, year, jel_list_pre, weighted_jel_count) %>%
-         rename('jel_alpha' = 'jel_list_pre')%>%
-         view())+
-  geom_area(aes(x=year, y=weighted_jel_count, group=jel_alpha, fill=jel_alpha, color=jel_alpha))+
+         rename('jel_alpha' = 'jel_list_pre') %>%
+         pivot_wider(names_from ='year',
+                     values_from = 'weighted_jel_count',
+                     values_fill = 0) %>%
+         pivot_longer(!c('jel_alpha', 'publication'),
+                      names_to = 'year',
+                      values_to = 'weighted_jel_count') %>%
+         mutate(year = as.numeric(year)))+
+  geom_area(aes(x=year, y=weighted_jel_count, group=jel_alpha, fill=jel_alpha, color=jel_alpha),
+            position = position_fill())+
+  scale_color_discrete(guide='none')+
+  scale_fill_manual(
+    values = unname(alphabet(n=length(unique(jel_normalized_unnested_df$jel_list_pre %>% na.omit())))),
+    breaks = jel_alpha_descriptions$code_col,
+    labels = jel_alpha_descriptions$desc_col,
+    name= 'JEL category:')+
+  labs(title='Distribution of topics (by JEL code) over time, by publication',
+       subtitle='Frequency weighted by number of JEL codes per article')+
+  ylab('Share')+
   theme_minimal()+
   facet_wrap('publication')
+ggsave(paste0(adhoc_path, 'jel_weighted_normalized_by_journal.png'), plot=last_plot(), height=8.5, width=11, units='in')
+
+
+ggplot(jel_normalized_unnested_df %>%
+         filter(year %notin% c(1990, 2021)) %>%
+         na.omit() %>% 
+         group_by(year, jel_list_pre) %>%
+         mutate(weighted_jel_count = sum(jel_list_elem_weight)) %>%
+         distinct(year, jel_list_pre, .keep_all = TRUE) %>%
+         select(year, jel_list_pre, weighted_jel_count) %>%
+         rename('jel_alpha' = 'jel_list_pre') %>%
+         pivot_wider(names_from = 'year',
+                     values_from = 'weighted_jel_count',
+                     values_fill = 0) %>%
+         pivot_longer(!c('jel_alpha'),
+                      names_to = 'year',
+                      values_to = 'weighted_jel_count') %>%
+         mutate(year = as.numeric(year)))+
+  geom_area(aes(x=year, y=weighted_jel_count, group=jel_alpha, color='black', fill=jel_alpha),
+           position=position_fill())+
+  scale_color_discrete(guide='none')+
+  scale_fill_manual(
+    values = unname(alphabet(n=length(unique(jel_normalized_unnested_df$jel_list_pre %>% na.omit())))),
+    breaks = jel_alpha_descriptions$code_col,
+    labels = jel_alpha_descriptions$desc_col,
+    name= 'JEL category:')+
+  labs(title='Distribution of topics (by JEL code) over time',
+       subtitle='Frequency weighted by number of JEL codes per article')+
+  ylab('Share')+
+  theme_minimal()
+ggsave(paste0(adhoc_path, 'jel_weighted_normalized.png'), plot=last_plot(), height=8.5, width=11, units='in')
+
+
+
 
 
 
 ggplot(jel_normalized_unnested_df %>%
          filter(year %notin% c(1990, 2021)) %>%
+         na.omit() %>% 
          group_by(year, jel_list_pre) %>%
          mutate(weighted_jel_count = sum(jel_list_elem_weight)) %>%
          distinct(year, jel_list_pre, .keep_all = TRUE) %>%
-         select(publication, year, jel_list_pre, weighted_jel_count) %>%
-         rename('jel_alpha' = 'jel_list_pre')%>%
+         select(year, jel_list_pre, weighted_jel_count) %>%
+         rename('jel_alpha' = 'jel_list_pre') %>%
+         pivot_wider(names_from = 'year',
+                     values_from = 'weighted_jel_count',
+                     values_fill = 0) %>%
+         pivot_longer(!c('jel_alpha'),
+                      names_to = 'year',
+                      values_to = 'weighted_jel_count') %>%
+         mutate(year = as.numeric(year)) %>%
+         group_by(year) %>%
+         mutate(weighted_jel_totals = sum(weighted_jel_count),
+                weighted_jel_share = weighted_jel_count / weighted_jel_totals) %>%
+         ungroup() %>%
          view())+
-  geom_area(aes(x=year, y=weighted_jel_count, group=jel_alpha, fill=jel_alpha, color=jel_alpha))+
+  geom_line(aes(x=year, y=weighted_jel_share, group=jel_alpha, color=jel_alpha),
+            size=1.25)+
+  scale_color_manual(
+    values = unname(alphabet(n=length(unique(jel_normalized_unnested_df$jel_list_pre %>% na.omit())))),
+    breaks = jel_alpha_descriptions$code_col,
+    labels = jel_alpha_descriptions$desc_col,
+    name= 'JEL category:')+
+  labs(title='Distribution of topics (by JEL code) over time',
+       subtitle='Frequency weighted by number of JEL codes per article')+
+  ylab('Share')+
+  theme_minimal()
+ggsave(paste0(adhoc_path, 'jel_weighted_normalized_line.png'), plot=last_plot(), height=8.5, width=11, units='in')
+
+
+ranking_table_df <- jel_normalized_unnested_df %>%
+  filter(year %notin% c(1990, 2021)) %>%
+  mutate(publication = toupper(publication)) %>%
+  na.omit() %>%
+  group_by(year, jel_list_pre, publication) %>%
+  mutate(weighted_jel_count = sum(jel_list_elem_weight)) %>%
+  distinct(year, jel_list_pre, .keep_all = TRUE) %>%
+  select(year, publication, jel_list_pre, weighted_jel_count) %>%
+  group_by(year, publication) %>%
+  arrange(desc(weighted_jel_count), .by_group = TRUE) %>%
+  mutate(year_pub_jel_rank = row_number()) %>% 
+  filter(year_pub_jel_rank <=5| jel_list_pre == 'L') %>%
+  left_join(jel_alpha_descriptions, by = c("jel_list_pre" = "code_col")) %>%
+  select(year, publication, year_pub_jel_rank, jel_list_pre, desc_col) %>%
+  ungroup() %>%
+  mutate(label = paste(jel_list_pre, desc_col, sep=': '),
+         label = paste(year_pub_jel_rank, label, sep='. ')) %>% 
+  filter(year %in% c(1991, 1995, 2000, 2005, 2010, 2015, 2020)) %>%
+  select(-c(jel_list_pre, desc_col)) %>% 
+  mutate(year_pub_jel_rank = ifelse(year_pub_jel_rank >5,
+                                    'Other',
+                                    year_pub_jel_rank)) %>%
+  pivot_wider(names_from = c('publication', 'year'), values_from = 'label') %>%
+  select(-c(year_pub_jel_rank)) %>%
+  view()
+
+
+for (pub in c('AER', 'ECA', 'JPE', 'QJE', 'RES')) {
+  stargazer(ranking_table_df %>%
+              select(starts_with(pub)), 
+            rownames = FALSE,
+            summary = FALSE,
+            out=paste0(adhoc_path, 'tex_tables/jel_ranking_table_', pub, '.tex'))
+    
+}
+
+
+
+
+
+
+
+
+
+
+ggplot(jel_normalized_df %>%
+         filter(year %notin% c(1990, 2021)) %>%
+         na.omit() %>%
+         group_by(year, publication) %>%
+         select(title, year, publication, first_jel) %>%
+         group_by(year) %>%
+         count(first_jel) %>%
+         rename('first_jel_count' = 'n') %>%
+         distinct(year, first_jel, .keep_all = TRUE) %>%
+         view())+
+  geom_area(aes(x=year, y=first_jel_count, group=first_jel, fill=first_jel))+
   theme_minimal()
 
 
