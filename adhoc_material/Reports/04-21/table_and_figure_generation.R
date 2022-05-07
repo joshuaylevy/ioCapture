@@ -14,7 +14,7 @@ code_col <- c('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q
 
 desc_col <- c(
   'General Economics and Teaching',
-  'History of Economic Through, Methodology and Heterodox Approaches',
+  'History of Economic Thought, Methodology and Heterodox Approaches',
   'Mathematical and Quantitative Methods',
   'Microeconomics',
   'Macroeconomics and Monetary Economics',
@@ -25,7 +25,7 @@ desc_col <- c(
   'Labor and Demographic Economics',
   'Law and Economics',
   'Industrial Organization',
-  'Business Administratio and Business Economics; Marketing; Accounting; Personnel Economics',
+  'Business Administration and Business Economics; Marketing; Accounting; Personnel Economics',
   'Economic History',
   'Economic Development, Innovation, Technologicla Change, and Growth',
   'Economic Systems',
@@ -35,8 +35,31 @@ desc_col <- c(
   'Other Special Topics'
 )
 
+desc_short_col <- c(
+  'General and Teaching',
+  'History of Thought, Methodology and Approaches',
+  'Mathematical and Quantitative Methods',
+  'Micro',
+  'Macro and Monetary',
+  'International',
+  'Finance',
+  'Public',
+  'Health, Education, and Welfare',
+  'Labor Economics',
+  'Law and Economics',
+  'Industrial Organization',
+  'Business, Marketing, and Accounting',
+  'History',
+  'Development, Innovation, Technology, and Growth',
+  'Economic Systems',
+  'Agricultural and Natural Resource Econoimcs; Environmental and Ecological Economics',
+  'Urban, Rural, Regional, Real Estate, and Transportation Economics',
+  'Misc.',
+  'Special Topics'
+)
 
-jel_alpha_descriptions <- data.frame(desc_col, code_col)
+
+jel_alpha_descriptions <- data.frame(desc_col, desc_short_col, code_col)
 
 
 
@@ -987,7 +1010,7 @@ ggplot(jel_normalized_df %>%
   geom_area(aes(x=year, y=predom_jel_count, group=predom_jel, color=predom_jel, fill=predom_jel))+
   scale_fill_manual(values=unname(alphabet(n=length(unique(jel_normalized_df$predom_jel %>% na.omit())))),
                     breaks = jel_alpha_descriptions$code_col,
-                    labels = jel_alpha_descriptions$desc_col,
+                    labels = jel_alpha_descriptions$desc_short_col,
                     name='Predominant Category')+
   scale_color_discrete(guide='none')+
   labs(title='Distribution of topics (by JEL code) over time, by publication',
@@ -1033,7 +1056,7 @@ ggplot(jel_normalized_unnested_df %>%
   scale_fill_manual(
     values = unname(alphabet(n=length(unique(jel_normalized_unnested_df$jel_list_pre %>% na.omit())))),
     breaks = jel_alpha_descriptions$code_col,
-    labels = jel_alpha_descriptions$desc_col,
+    labels = jel_alpha_descriptions$desc_short_col,
     name= 'JEL category:')+
   labs(title='Distribution of topics (by JEL code) over time, by publication',
        subtitle='Frequency weighted by number of JEL codes per article')+
@@ -1064,7 +1087,7 @@ ggplot(jel_normalized_unnested_df %>%
   scale_fill_manual(
     values = unname(alphabet(n=length(unique(jel_normalized_unnested_df$jel_list_pre %>% na.omit())))),
     breaks = jel_alpha_descriptions$code_col,
-    labels = jel_alpha_descriptions$desc_col,
+    labels = jel_alpha_descriptions$desc_short_col,
     name= 'JEL category:')+
   labs(title='Distribution of topics (by JEL code) over time',
        subtitle='Frequency weighted by number of JEL codes per article')+
@@ -1102,7 +1125,7 @@ ggplot(jel_normalized_unnested_df %>%
   scale_color_manual(
     values = unname(alphabet(n=length(unique(jel_normalized_unnested_df$jel_list_pre %>% na.omit())))),
     breaks = jel_alpha_descriptions$code_col,
-    labels = jel_alpha_descriptions$desc_col,
+    labels = jel_alpha_descriptions$desc_short_col,
     name= 'JEL category:')+
   labs(title='Distribution of topics (by JEL code) over time',
        subtitle='Frequency weighted by number of JEL codes per article')+
@@ -1124,12 +1147,12 @@ ranking_table_df <- jel_normalized_unnested_df %>%
   mutate(year_pub_jel_rank = row_number()) %>% 
   filter(year_pub_jel_rank <=5| jel_list_pre == 'L') %>%
   left_join(jel_alpha_descriptions, by = c("jel_list_pre" = "code_col")) %>%
-  select(year, publication, year_pub_jel_rank, jel_list_pre, desc_col) %>%
+  select(year, publication, year_pub_jel_rank, jel_list_pre, desc_short_col) %>%
   ungroup() %>%
-  mutate(label = paste(jel_list_pre, desc_col, sep=': '),
+  mutate(label = paste(jel_list_pre, desc_short_col, sep=': '),
          label = paste(year_pub_jel_rank, label, sep='. ')) %>% 
   filter(year %in% c(1991, 1995, 2000, 2005, 2010, 2015, 2020)) %>%
-  select(-c(jel_list_pre, desc_col)) %>% 
+  select(-c(jel_list_pre, desc_short_col)) %>% 
   mutate(year_pub_jel_rank = ifelse(year_pub_jel_rank >5,
                                     'Other',
                                     year_pub_jel_rank)) %>%
@@ -1141,6 +1164,7 @@ ranking_table_df <- jel_normalized_unnested_df %>%
 for (pub in c('AER', 'ECA', 'JPE', 'QJE', 'RES')) {
   stargazer(ranking_table_df %>%
               select(starts_with(pub)), 
+            font.size='footnotesize',
             rownames = FALSE,
             summary = FALSE,
             out=paste0(adhoc_path, 'tex_tables/jel_ranking_table_', pub, '.tex'))
