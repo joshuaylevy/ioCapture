@@ -1,0 +1,253 @@
+\documentclass[11pt, letterpaper, twoside]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fancyhdr}
+\usepackage[margin=1in, include foot]{geometry}
+\usepackage{ragged2e}
+\usepackage[]{hyperref}
+\usepackage{apacite}
+\usepackage{setspace}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{etoolbox}
+\usepackage{graphicx}
+\usepackage{amsmath, amssymb}
+\usepackage{cleveref}
+\usepackage{wrapfig}
+\usepackage{afterpage}
+\usepackage{floatrow}
+\usepackage{tikz}
+\usepackage{booktabs}
+\usepackage{siunitx}
+\usepackage{dcolumn}
+\usepackage{pdflscape}
+\usepackage{adjustbox}
+\usepackage{tablefootnote}
+
+
+
+\setlength{\parindent}{0pt}
+\floatsetup[table]{capposition=top}
+
+\title{\singlespacing\textbf{Capture of the Academic Industrial Organization Literature}}
+
+
+\author{ 
+    Joshua Y. Levy \thanks{Joshua Y. Levy  (joshua.levy@chicagobooth.edu), Stigler Center, Booth School of Business, University of Chicago}}
+\date{\today}
+
+\onehalfspacing
+\begin{document}
+\begin{titlepage}
+    \maketitle
+    \thispagestyle{empty}
+\end{titlepage}
+
+
+\newpage
+\pagenumbering{arabic}
+
+
+\section{The Production of Academic Articles}
+Between 1991 and 2020, the amount of space for articles in the Top 5 journals, the \textit{American Economic Review} (AER), \textit{Econometrica} (ECA), the \textit{Journal of Political Economy} (JPE), the \textit{Quarterly Journal of Economics} (QJE), and the \textit{Review of Economic Studies} (RES) (and the \textit{RAND Journal of Economics} (RJE)) has grown slowly and steadily. Notably, however the AER makes up some 40\% of articles published in the Top 5, with almost double the number of articles that any other journal published in any given year.\\
+\begin{figure}[!ht]
+    \begin{subfigure}[h]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{top_5_over_time_col.png}
+        \caption{By count}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[h]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{top_5_over_time_col_shares.png}
+        \caption{By share}
+    \end{subfigure}
+    \begin{subfigure}[h]{\textwidth}
+        \centering
+        \includegraphics[width=0.5\textwidth]{top5_over_time.png}
+        \caption{By count}
+    \end{subfigure}
+    \caption{Annual publications in the Top 5 (and RAND)}
+\end{figure}
+
+Though there has been some fluctuation over time, the Top 5 (and RAND) collectively published between 390 and 600 articles per year, with an average of 471 publications per year between 1990 and 2021.\footnote{Note that 2021 may bias this average downwards as not all articles may have yet been indexed by EconLit. Observations from 1990 are also potentially misleading as that year marked a major for the JEL code format (from a decimal-numeric system to an alpha-numeric system). Because not all articles use a uniform categorization format we omit observations from this year. Hereafter, we trim all data to consider only the period from 1991 to 2020.} See Appendix A for a full table of annual publication figures.\\
+
+We also consider the composition of topics published in Top 5 over time.\footnote{In this instance we omit RAND because of its position as a field journal that is likely to have far less variation in topics published.} To assess this, we construct two measures of topics. First, we identify a ``predominant'' JEL code among those listed on a paper. For example, if a paper is published with five JEL codes --- C53, E43, F31, F37, and G15 for instance --- because there are two codes that begin with ``F'', we identify the paper as an ``International Economics'' paper. Ties are resolved by random number generator. Using this measure, Figure 2 plots the distribution of topics over time.
+
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=\textwidth]{jel_predom_normalized.png}
+    \caption{Topics in the Top 5 journals over time.}
+\end{figure}
+
+
+
+
+We also use a weighted-frequency approach to identify trends in topic publication over time. For this measure, using the same codes as above, such a paper would receive four JEL categorizations --- ``C,'' ``E,'' ``F,'' and ``G'' each with weights commensurate with their within-paper frequency. That is, ``F'' would receive 40\% weight, and the remaining codes would each receive 20\% weights. These weights are then aggregated over each journal for each year. The results are presented below in Figure 3. When using this measure, we hereafter continue to use the terms ``articles,'' or ``publications'' for purposes of consistency. However, this measure more precisely refers to the number or share of particular JEL codes relative to all JEL codes published in the Top 5/the journal of interest.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=\textwidth]{jel_weighted_normalized_line.png}
+    \caption{Topics in the Top 5 journals over time. N.B.: The vertical-axis has been broken twice in order to improve legibility by creating more space between series.}    
+\end{figure}
+
+Throughout, the time series, papers in ``Microeconomics'' (D) have taken up an outsized share of Top 5 publications. There are some other topics that constitute a disproportionate share of publications, such as ``Labor Economics'' (J) and ``Mathematical and Quantitative Methods'' (CXX), but both such categories are on the order of half a magnitude smaller than microeconomics. In this time sample, ``Industrial Organization'' (L) papers constitute between 3\% (in 1998) and 8\% (in 2001) of Top 5 publications.\\
+
+We then use the same measure to consider how topics are represented in each of the Top 5 journals. In Figure 4 below, similar trends as above are identifiable. Microeconomics is well represented in all of the Top 5 journals (though less so in the AER and QJE), as is Labor (with the exception of \textit{Econometrica}). \textit{Econometrica} stands out as being the least topic-diverse of the Top 5 journals, with its publications being much more focussed on quantitative methods topics and microeconomics than the other journals' more general-interest profiles. As above, it is hard to identify clear trends in topic popularity over time. That is, \textit{prima facie}, Industrial Organization appears to constitute a small part of the Top 5 literature, but not particularly so relative to other topics.\footnote{For an ordinal ranking of topics in each of the Top 5 journals for selected years, see Appendix A Table 2.}
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{jel_weighted_normalized_by_journal.png}
+    \caption{Topics in the Top 5 over time}
+\end{figure}
+
+
+
+\section{The Role of Industrial Organization}
+We then consider how Industrial Organization (IO) papers have featured in the Top 5 and RAND over time. We consider a paper to be an ``IO'' publication if the article's associated Journal of Economic Literature (JEL) codes contains \textit{at least} one code that begins with ``L,'' hereafter regularly referred to as LXX. (JEL codes since 1990 have been a letter followed by two numbers, each indicating a greater degree of topic-specificity.) There are other JEL codes which could ostensibly be considered IO-related. These include K21 (Antitrust law), D4 (Market structure, pricing, and design), O3 (Innovation; research and development; technological change; intellectual property rights), and G34 (Mergers; acquisitions; restructuring; corporate governance). However, these are omitted at first to make comparisons across various topics/groups easier. Using this methodology, we identify 2,380 IO-related articles across the Top 5 (and RAND) between 1991 and 2020.\\
+
+\begin{figure}[!ht]
+    \begin{subfigure}[h]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{LXX-code-share-area.png}
+        \caption{By count}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[h]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{LXX-code-share-area-normalized.png}
+        \caption{By share}
+    \end{subfigure}
+    \caption{Industrial Organization in the Top 5 (and RAND)}
+\end{figure}
+
+During the the period from 1990 to 2020, IO papers have made up, on average, approximately 16\% of articles published in the Top 5 (and RAND). This share has grown steadily over time, with the greatest share of such articles having been published in 2020 (20.8\%).\footnote{See Table 2 in Appendix B for a full table of annual IO share figures.} This pattern, however, is not agnostic pf journal. That is, the AER and QJE, publish lots of IO papers relative to, for example, \textit{Econometrica}. Additionally, as is to be expected of a field journal, \textit{RAND} regularly sees almost 40\% its publications mention at least one LXX JEL code.\footnote{For an annual breakdown of by-journal IO shares, please see Appendix B Table 4.} \\
+
+Additionally, the inclusion of RAND may be misleading. As noted above, when excluding RAND, IO papers make up only between 3\% and 8\% of articles published in the Top 5 journals. Those shares appear to be in conflict with those plots presented below in Figure 5 (b), which, for many of the publications of interest, present significantly larger shares. However, recall that Figures 3 and 4 above presented the article-level \textit{weighted} frequency of JEL codes, whereas Figure 6 the \textit{absolute} frequency of LXX JEL codes. That is, the seemingly contradictory results of these two figures are reconcilable in the case that IO-related articles are frequently published with lots of other JEL codes also listed on the those articles (thereby reducing the weight afforded the LXX code in Figure 3).
+
+\begin{figure}[!ht]
+    \begin{subfigure}[h]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{LXX-code-share-area-by-journal.png}
+        \caption{By count}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[h]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{LXX-code-share-area-normalized-by-journal.png}
+        \caption{By share}
+    \end{subfigure}
+    \caption{Industrial Organization in the Top 5 (and RAND), by journal}
+\end{figure}
+
+\newpage
+
+\section{The Role of Anti-Trust}
+Even within ``L'' Industrial Organization category, there are 10 classes of JEL codes that refer to topics from ``Market structure, firm strategy and market performance'' (L1) to ``Industry studies: transportation and utilities'' (L9). We are particularly interested in the papers published in the Top 5 (and RAND) that bear at least one L4 code, indicating that the paper pertains to ``Antitrust issues and policies.''\\
+
+\begin{figure}[!ht]
+    \begin{subfigure}[h]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{L4-vs-LXX.png}
+        \caption{By count}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[h]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{L4-vs-LXX-normalized.png}
+        \caption{By share}
+    \end{subfigure}
+    \caption{Antitrust within Industrial Organization in the Top 5 (and RAND)}
+\end{figure}
+
+As evidenced in Figures 7(a) and 7(b), antitrust (L4) makes up a \textit{de minimis share} of even IO (LXX) papers, let alone the sample of papers published in the top journals, at large. Moreover, the number of IO publications in ECA, JPE, QJE, and RES are relatively small, and to the extent that antitrust papers do appear in the sample of journals we consider, they are highly concentrated in the \textit{RAND Journal of Economics}. Between 1991 and 2021, we identify 103 articles that are associated with antitrust (L4), just over 4\% of the IO-related (LXX) papers published in the Top 5 (and RAND) in the same period.
+
+
+\begin{figure}[!ht]
+    \begin{subfigure}[h]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{L4-vs-LXX-by-journal.png}
+        \caption{By count}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[h]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{L4-vs-LXX-normalized-by_journal.png}
+        \caption{By share}
+    \end{subfigure}
+    \caption{Antitrust within Industrial Organization in the Top 5 (and RAND), by journal}
+\end{figure}
+
+\subsection{Anti-Trust relative to Wages}
+The above result -- that antitrust papers make up but a negligible share of articles published in the Top 5 (and RAND) -- we consider comparing antitrust as a topic against another area of study that has considerable policy implications: wages and compensation. We do this to see if the sub-letter level of a JEL code is too specific to identify lines of literature in the Top 5. As demonstrated in Figure 9, the considerably larger share of the Top 5 (and RAND) articles identifiable as being associated with wage studies (J3), suggests that there are strands of the literature that are identifiable with sub-letter JEL code policy areas. This again points to a dearth of antitrust papers in the most prestigious economics journals. 
+
+\begin{figure}[!ht]
+    \begin{subfigure}[h]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{j3-l4-top5.png}
+        \caption{By count}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[h]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{j3-l4-top5-normalized.png}
+        \caption{By share}
+    \end{subfigure}
+    \caption{The relative frequencies of wage-studies (J3) and antitrust (L4) articles in the Top 5 (and RAND).}
+\end{figure}
+
+\newpage
+
+\appendix
+% APPENDIX A
+\section{The Production of Academic Articles}
+Table 1 presents the count of articles published in each of the Top 5 Journals (and RAND) during the time period of interest: 1990 to 2021. As noted above, in subsequent tables and figures, we trim the time series to cover only 1990 to 2020 so as to avoid potential complications due to incomplete indexing and/or changing JEL code formats.
+\input{tex_tables/top5_publications_by_year_cleaned.tex}
+
+
+Table 2 presents the ordinal ranking of the top five JEL categories in each journal for selected years. In the case that Industrial Organization (L) is \textit{not} one of the top 5 categories, it and its ordinal ranking in that journal-year are given as a sixth entry. Note that when creating this ordinal ranking the \textit{weighted} frequencies of JEL codes are used.  
+\newpage
+\begin{landscape}
+    \thispagestyle{empty}
+    \input{tex_tables/jel_ranking_table_together.tex}
+\end{landscape}
+
+\section{The Role of Industrial Organization}
+Tables 3 and 4 present the count and share of Industrial Organization articles in the Top 5 (and RAND), by year. Whereas Table 3 presents the IO count and share aggregated over all of the journals, by year, Table 4 presents the count of all articles published and the share of those that are IO-related, for each journal, by year. Note that for both Tables 3 and 4, the IO Share figures are calculated using the \textit{absolute} frequencies \textsc{not} the weighted frequencies.
+\input{tex_tables/io_share_by_year_cleaned.tex}
+
+\input{tex_tables/io_share_journal_by_year_cleaned.tex}
+
+\newpage
+\section{Miscellaneous}
+We additionally try to investigate the frequency of antitrust or related IO topics in the Top 5 (and RAND) by naively examining the abstracts of those papers. A paper is counted if a pattern of interest is matched in the abstract. We use open-ended patterns wherever possible to maximize the chances of identify a match. For example, we construct the monopoly pattern as ``monopol'' so that a regex match would be identified not only for ``monopoly'' but also for ``monopolization.'' The results of this effort are presented in Table 5.
+
+
+\begin{table}[h] \centering 
+    \caption{Appearance of miscellaneous terms in article abstracts, by journal} 
+    \label{} 
+    \begin{adjustbox}{max width=\textwidth}
+        \begin{tabular}{@{\extracolsep{5pt}} ccccccccccc} 
+            \\[-1.8ex]\hline 
+            \hline \\[-1.8ex]
+            & \multicolumn{6}{c}{\textit{Abstract contains:}} & \multicolumn{4}{c}{\textit{JEL Code}} \\ 
+          \cline{2-7} \cline{8-11} \\
+            Publication & Anti Trust & Market Power & Anti Competitive & Monopoly & Merger & Cartel & L & K & L4 & K21 \\ 
+            \hline \\[-1.8ex] 
+            AER & 11 & 25 & 6 & 52 & 30 & 15 & 869 & 216 & 43 & 24 \\ 
+            ECA & 1 & 8 & 1 & 22 & 4 & 3 & 154 & 20 & 1 & 7 \\ 
+            JPE & 5 & 16 & 1 & 27 & 7 & 5 & 279 & 78 & 12 & 7 \\ 
+            QJE & 1 & 12 & 1 & 25 & 8 & 0 & 239 & 60 & 4 & 0 \\ 
+            RES & 2 & 9 & 1 & 52 & 5 & 2 & 228 & 39 & 3 & 1 \\ 
+            RJE & 21 & 37 & 13 & 113 & 48 & 16 & 679 & 87 & 43 & 15 \\ 
+            TOTAL & 41 & 107 & 23 & 291 & 102 & 41 & 2448 & 500 & 106 & 54 \\ 
+            \hline \\[-1.8ex] 
+        \end{tabular}    
+    \end{adjustbox}
+\end{table} 
+
+
+
+\end{document}

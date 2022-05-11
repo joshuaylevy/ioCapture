@@ -2,6 +2,13 @@
 00_Scraping/env_keys.json
 
 
+## IGNORE .xml files because these are protected by EBSCOHOST copyright in EconLit
+**/*.xml
+
+## Ignore .csv files becuase these have the off-chance of creating large files that GitHub won't handle
+**/*.csv 
+
+
 # Ignore previous work because of lots of large files
 ZheFuLiWork/
 
