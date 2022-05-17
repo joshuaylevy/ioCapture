@@ -1,9 +1,11 @@
 # IMPORTANT ATTENTION NEEDED
 00_Scraping/env_keys.json
+00_Scraping/proxies.txt
 
 
 ## IGNORE .xml files because these are protected by EBSCOHOST copyright in EconLit
 **/*.xml
+00_Scraping/nber_working_papers/*.pdf
 
 ## Ignore .csv files becuase these have the off-chance of creating large files that GitHub won't handle
 **/*.csv 
