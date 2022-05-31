@@ -3,6 +3,11 @@
 00_Scraping/proxies.txt
 
 
+
+# MISC. Joshua's personal ignores
+00_Scraping/test.json
+
+
 ## IGNORE .xml files because these are protected by EBSCOHOST copyright in EconLit
 **/*.xml
 00_Scraping/nber_working_papers/*.pdf

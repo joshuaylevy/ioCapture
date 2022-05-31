@@ -23,3 +23,4 @@
 - BeautifulSoup4
 - lxml
 - Requests
+- PyPDF2
