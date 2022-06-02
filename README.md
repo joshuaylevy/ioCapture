@@ -19,9 +19,16 @@
 - Note the requirement for the ioCapture conda environment
 
 
-##### Pacakges Required For Use (and associated dependencies):
+#### Pacakges Required For Use (and associated dependencies):
+**Python**
 - Pandas
 - BeautifulSoup4
 - lxml
 - Requests
 - PyPDF2
+
+**R**
+- tidyverse
+- scales
+- stargazer
+- pals

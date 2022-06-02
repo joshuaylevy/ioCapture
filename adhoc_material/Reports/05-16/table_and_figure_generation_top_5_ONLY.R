@@ -1243,7 +1243,7 @@ for (pub in c('AER', 'ECA', 'JPE', 'QJE', 'RES')) {
 
 
 
-table_df <- read_csv('00_Scraping/labels_for_table.csv') %>%
+table_df <- read_csv('labels_for_table.csv') %>%
   rename('Publication' = '...1')
 
 stargazer(table_df,
