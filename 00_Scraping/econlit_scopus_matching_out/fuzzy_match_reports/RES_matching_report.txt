@@ -1,4 +1,4 @@
-2022-07-06 14:37:23.056411
+2022-07-06 15:22:50.396401
 Original RES Scopus-collected observations: 1461
 Original RES EconLit-collected observations: 1510
 Original RES collection TOTAL observations: 2971
