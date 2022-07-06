@@ -1,0 +1,139 @@
+
+Original RES Scopus-collected observations: 1461
+Original RES EconLit-collected observations: 1510
+Original RES collection TOTAL observations: 2971
+Number of RES naively-matched observations: 1315
+Post-naive match RES Scopus-only observations: 146
+Post-naive match RES EconLit-only observations: 195
+Number of RES fuzzy-matched observations 1423
+Number of RES post-fuzzy-match Scopus-only remainder observations: 38
+Number of RES post-fuzzy-match EconLit-only remainder observations: 87
+SCOPUS ARTICLES REMAINING UNMATCHED (38)
+
+	Monopoly without a Monopolist: An Economic Analysis of the Bitcoin Payment System
+	Optimal Taxation with Private Insurance
+	Measuring Bias in Consumer Lending
+	Default Effects and Follow-On Behaviour: Evidence from An Electricity Pricing Program
+	The Value of Unemployment Insurance
+	Workforce Composition, Productivity, and Labour Regulations in a Compensating Differentials Theory of Informality
+	Rules without Commitment: Reputation and Incentives
+	Shadow Banking and the Four Pillars of Traditional Financial Intermediation
+	Non-parametric Analysis of Time-Inconsistent Preferences
+	Variation Margins, Fire Sales, and Information-constrained Optimality
+	A Theory of Foreign Exchange Interventions
+	Dynastic Precautionary Savings
+	Credit Shocks and Equilibrium Dynamics in Consumer Durable Goods Markets
+	Identifying Shocks via Time-Varying Volatility
+	Global Imbalances and Policy Wars at the Zero Lower Bound
+	Optimal automatic stabilizers
+	Reorganization or liquidation: Bankruptcy choice and firm dynamics
+	Identifying the costs of a public health success: Arsenic well water contamination and productivity in bangladesh
+	A theory of narrow thinking
+	A reply to campbell and mau
+	Erratum: Consumer scores and price discrimination (The Review of Economic Studies (2020) 87:2 (750-791) DOI: 10.1093/restud/rdz046)
+	Fiscal rules as bargaining chips
+	Informational herding, optimal experimentation, and contrarianism
+	Erratum: The equilibrium impact of agricultural risk on intermediate inputs and aggregate productivity (The Review of Economic Studies (2020) DOI: 10.1093/restud/rdaa084)
+	The gender earnings gap in the gig economy: Evidence from over a million rideshare drivers
+	Adverse selection in the marriage market: Hiv testing and marriage in rural malawi
+	On trade induced technical change: The impact of chinese imports on innovation, it, and productivity
+	Record-keeping and cooperation in large societies
+	All-pay oligopolies: Price competition with unobservable inventory choices
+	Prizes versus contracts as incentives for innovation
+	The returns to nursing: Evidence from a parental-leave program
+	The equilibrium impact of agricultural risk on intermediate inputs and aggregate productivity
+	Erratum: Withdrawn as duplicate: Attribution bias in consumer choice (Review of Economic Studies DOI: 10.1093/restud/rdy054)
+	Modality is Not Explainable by Essence
+	Erratum: Stagnation Traps [Review of Economic Studies (2017)] doi: 10.1093/restud/rdx063
+	Erratum: Market size, trade, and productivity (Review of Economic Studies vol. 75 (1) 10.111/j1467-937x.2007.00463.x)
+	Editorial announcement
+	Variable Returns to Scale, Non-Uniqueness of Equilibrium and the Gains from International Trade (Volume 58(4), No. 196, July 1991, pages 807-816)
+ECONLIT ARTICLES REMAINING UNMATCHED (87)
+
+	Optimality of Debt under Flexible Information Acquisition
+	Gifts of the Immigrants, Woes of the Natives: Lessons from the Age of Mass Migration
+	Coarse Pricing Policies
+	A Macroeconomic Model with Financial Panics
+	Backlash: The Unintended Effects of Language Prohibition in U.S. Schools after World War I
+	Consumption Network Effects
+	Optimal Dynamic Carbon Taxes in a Climate-Economy Model with Distortionary Fiscal Policy
+	Escape Dynamics in Learning Models
+	Instrumental Variables with Unrestricted Heterogeneity and Continuous Treatment: Corrigendum
+	Expectations-Based Reference-Dependent Life-Cycle Consumption
+	Signalling Effects of Monetary Policy
+	A Theory of Contracts with Limited Enforcement
+	Sellers with Misspecified Models
+	Sorting Multidimensional Types: Theory and Application
+	Optimal Voting Rules
+	Technology and Production Fragmentation: Domestic versus Foreign Sourcing
+	The Industrialization and Economic Development of Russia through the Lens of a Neoclassical Growth Model
+	Old, Sick, Alone, and Poor: A Welfare Analysis of Old-Age Social Insurance Programmes
+	Ability Peer Effects in University: Evidence from a Randomized Experiment
+	Dynamic Oligopoly with Incomplete Information
+	Multiproduct Retailing
+	Dissecting the Effect of Credit Supply on Trade: Evidence from Matched Credit-Export Data
+	Loss Aversion and Inefficient Renegotiation
+	Goods Prices and Availability in Cities
+	Projects and Team Dynamics
+	Do Competitive Workplaces Deter Female Workers? A Large-Scale Natural Field Experiment on Job Entry Decisions
+	A Linder Hypothesis for Foreign Direct Investment
+	Learning and Model Validation
+	Attribution Bias in Consumer Choice: Correction
+	General Equilibrium Returns to Human and Investment Capital under Moral Hazard
+	Millian Efficiency with Endogenous Fertility.
+	Stagnation Traps: Erratum
+	Screening in a Matching Market
+	Repeated Bargaining with Persistent Private Information
+	Estimation of Dynamic Panel Data Sample Selection Models
+	Who Wants a Good Reputation?
+	Constitutional Rules of Exclusion in Jurisdiction Formation
+	Limited Foresight May Force Cooperation
+	A Decentralized Market with Common Values Uncertainty: Non-Steady States
+	Queues and Hierarchies
+	Multiple-Object Auctions with Budget Constrained Bidders
+	Optimal Contracting with Private Knowledge of Wealth and Ability
+	Moral Hazard and Renegotiation with Multiple Agents
+	Erratum.
+	Funding Public Goods with Lotteries: Experimental Evidence
+	Financing Public Goods by Means of Lotteries
+	Sequential Screening
+	Consumer Durables and Inertial Behaviour: Estimation and Aggregation of (S, s) Rules for Automobile Purchases
+	Strategic Ignorance as a Self-Disciplining Device
+	Bundling and Optimal Auctions of Multiple Products
+	Optimal Multi-object Auctions
+	Equilibrium in Sealed High Bid Auctions
+	Asymmetric Auctions
+	A Study of Collusion in First-Price Auctions
+	Incentives, Information, and Organizational Form
+	Dynamic Voluntary Contribution to a Public Project
+	The Scope of Anonymous Voluntary Bargaining under Asymmetric Information
+	Ruling Out Multiplicity and Indeterminacy: The Role of Heterogeneity
+	(S, s) Inventory Policies in General Equilibrium
+	Information Acquisition in Financial Markets
+	Contagion
+	Noisy Contagion without Mutation
+	Basins of Attraction, Long-Run Stochastic Stability, and the Speed of Step-by-Step Evolution
+	Communication and Coordination in Social Networks
+	Comparative Statics and Relative Convexity
+	Comparative Dynamics via Envelope Methods in Variational Calculus
+	On the Solution of Linear Difference Equations with Rational Expectations
+	Roy-Consistent Expectations
+	The Effects of Firm Optimizing Behaviour in Matching Models
+	Imhof Approximations to Econometric Estimators
+	Adverse Selection and Renegotiation in Procurement
+	Uncertainty and Delay in Bargaining
+	Repeated Games with Long-run and Short-run Players
+	Entry in Monopoly Markets
+	Index.
+	Corrigendum.
+	Ability Peer Effects in University: Evidence from a Randomized Experiment: Corrigendum
+	Untitled.
+	Delay and Cycles: Erratum
+	Jane Martin: Special Tribute
+	Market Size, Trade, and Productivity: Erratum
+	Editorial Announcement: Antoni Calvo-Armengol
+	Editorial Announcement.
+	Who Wants a Good Reputation? Erratum
+	Editorial Announcement.
+	Symposium on Optimal Monetary Policy.
+	Review of Economic Studies European Meetings.
