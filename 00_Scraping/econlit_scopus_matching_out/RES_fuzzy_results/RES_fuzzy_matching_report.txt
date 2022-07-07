@@ -1,13 +1,13 @@
-2022-07-06 15:22:50.396401
+2022-07-06 22:03:25.035965
 Original RES Scopus-collected observations: 1461
-Original RES EconLit-collected observations: 1510
-Original RES collection TOTAL observations: 2971
+Original RES EconLit-collected observations: 1540
+Original RES collection TOTAL observations: 3001
 Number of RES naively-matched observations: 1315
 Post-naive match RES Scopus-only observations: 146
-Post-naive match RES EconLit-only observations: 195
+Post-naive match RES EconLit-only observations: 225
 Number of RES fuzzy-matched observations 1423
 Number of RES post-fuzzy-match Scopus-only remainder observations: 38
-Number of RES post-fuzzy-match EconLit-only remainder observations: 87
+Number of RES post-fuzzy-match EconLit-only remainder observations: 117
 SCOPUS ARTICLES REMAINING UNMATCHED (38)
 
 	Monopoly without a Monopolist: An Economic Analysis of the Bitcoin Payment System
@@ -48,8 +48,38 @@ SCOPUS ARTICLES REMAINING UNMATCHED (38)
 	Erratum: Market size, trade, and productivity (Review of Economic Studies vol. 75 (1) 10.111/j1467-937x.2007.00463.x)
 	Editorial announcement
 	Variable Returns to Scale, Non-Uniqueness of Equilibrium and the Gains from International Trade (Volume 58(4), No. 196, July 1991, pages 807-816)
-ECONLIT ARTICLES REMAINING UNMATCHED (87)
+ECONLIT ARTICLES REMAINING UNMATCHED (117)
 
+	Learning from House Prices: Amplification and Business Fluctuations.
+	The Aggregate Implications of Mergers and Acquisitions.
+	What Would You Do with $500? Spending Responses to Gains, Losses, News, and Loans.
+	Intergenerational Mobility in the Very Long Run: Florence 1427–2011.
+	Understanding Cultural Persistence and Change.
+	Investments in social ties, risk sharing, and inequality.
+	Property Rights, Land Misallocation, and Agricultural Efficiency in China.
+	The Cutoff Structure of Top Trading Cycles in School Choice.
+	Motivational Ratings.
+	Stochastic Revealed Preferences with Measurement Error.
+	Social Norms, Labour Market Opportunities, and the Marriage Gap Between Skilled and Unskilled Women.
+	Learning to game the system.
+	Augmenting Markets with Mechanisms.
+	Conventions under Heterogeneous Behavioural Rules.
+	Cognitive Imprecision and Small-Stakes Risk Aversion.
+	Germs, Social Networks, and Growth.
+	Anonymity or Distance? Job Search and Labour Market Exclusion in a Growing African City.
+	Haste or Waste? Peer Pressure and Productivity in the Emergency Department.
+	When Is Pure Bundling Optimal?
+	Stability, Strategy-Proofness, and Cumulative Offer Mechanisms.
+	Informational Robustness in Intertemporal Pricing.
+	Monetary Policy for a Bubbly World.
+	Only Time Will Tell: A Theory of Deferred Compensation.
+	Building the City: From Slums to a Modern Metropolis.
+	The Revelation Principle in Multistage Games.
+	Development Projects and Economic Networks: Lessons from Rural Gambia.
+	On the Iterated Estimation of Dynamic Discrete Choice Games.
+	Identity Politics and Trade Policy.
+	Measuring Ex Ante Welfare in Insurance Markets.
+	Structural Change in Investment and Consumption—A Unified Analysis.
 	Optimality of Debt under Flexible Information Acquisition
 	Gifts of the Immigrants, Woes of the Natives: Lessons from the Age of Mass Migration
 	Coarse Pricing Policies
@@ -93,7 +123,6 @@ ECONLIT ARTICLES REMAINING UNMATCHED (87)
 	Multiple-Object Auctions with Budget Constrained Bidders
 	Optimal Contracting with Private Knowledge of Wealth and Ability
 	Moral Hazard and Renegotiation with Multiple Agents
-	Erratum.
 	Funding Public Goods with Lotteries: Experimental Evidence
 	Financing Public Goods by Means of Lotteries
 	Sequential Screening
@@ -114,6 +143,7 @@ ECONLIT ARTICLES REMAINING UNMATCHED (87)
 	Noisy Contagion without Mutation
 	Basins of Attraction, Long-Run Stochastic Stability, and the Speed of Step-by-Step Evolution
 	Communication and Coordination in Social Networks
+	Erratum.
 	Comparative Statics and Relative Convexity
 	Comparative Dynamics via Envelope Methods in Variational Calculus
 	On the Solution of Linear Difference Equations with Rational Expectations
@@ -127,8 +157,8 @@ ECONLIT ARTICLES REMAINING UNMATCHED (87)
 	Index.
 	Corrigendum.
 	Ability Peer Effects in University: Evidence from a Randomized Experiment: Corrigendum
-	Untitled.
 	Delay and Cycles: Erratum
+	Untitled.
 	Jane Martin: Special Tribute
 	Market Size, Trade, and Productivity: Erratum
 	Editorial Announcement: Antoni Calvo-Armengol
