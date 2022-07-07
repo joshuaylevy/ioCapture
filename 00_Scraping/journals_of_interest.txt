@@ -2,27 +2,27 @@ Journals of Interest
 Journal Name {PUB_CODE} (ISSN)
 
 TOP 5:
-American Economic Review {AER} (00028282)
-Econometrica {ECA} (00129682)
-Journal of Political Economy {JPE} (00223808)
-Quarterly Journal of Economics {QJE} (00335533)
-Review of Economic Studies {RES} (00346527)
+- American Economic Review - {AER} (00028282)
+- Econometrica - {ECA} (00129682)
+- Journal of Political Economy - {JPE} (00223808)
+- Quarterly Journal of Economics - {QJE} (00335533)
+- Review of Economic Studies - {RES} (00346527)
 
 INDUSTRIAL ORGANIZATION & ANTI-TRUST:
-Antitrust Bulletin {ATB} (0003603X)
-Antitrust Law Journal {ALJ} (00036056)
-Journal of Economics and Management Strategy {JEM} (15309134)
-Journal of Human Resources {JHR} (0022166X) 
-Journal of Law and Economics {JLE} (00222186)
-Journal of Law, Economics, and Organization {JLO} (87566222)
-RAND Journal of Economics {RJE} (07416261)
+- Antitrust Bulletin - {ATB} (0003603X)
+- Antitrust Law Journal - {ALJ} (00036056)
+- Journal of Economics and Management Strategy - {JEM} (15309134)
+- Journal of Human Resources - {JHR} (0022166X) 
+- Journal of Law and Economics - {JLE} (00222186)
+- Journal of Law, Economics, and Organization - {JLO} (87566222)
+- RAND Journal of Economics - {RJE} (07416261)
 
 
 FINANCE:
-Journal of Finance {JOF} (00221082)
-Journal of Financial Economics {JFE} (0304405X)
-Review of Financial Studies {RFS} (08939454)
+- Journal of Finance - {JOF} (00221082)
+- Journal of Financial Economics - {JFE} (0304405X)
+- Review of Financial Studies - {RFS} (08939454)
 
 
 LABOR:
-Journal of Labor Economics {JOL} (0734306X)
+- Journal of Labor Economics - {JOL} (0734306X)
