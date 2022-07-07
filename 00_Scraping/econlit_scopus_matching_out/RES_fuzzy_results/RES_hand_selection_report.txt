@@ -1,5 +1,5 @@
-2022-07-06 22:38:24.964131
-FUZZY MATCHING REPORT
+2022-07-06 22:38:35.186346
+HAND SELECTION_REPORT
 Original RES Scopus-collected observations: 1461
 Original RES EconLit-collected observations: 1540
 Original RES collection TOTAL observations: 3001
@@ -14,10 +14,10 @@ SCOPUS ARTICLES REMAINING UNMATCHED (38)
 	Monopoly without a Monopolist: An Economic Analysis of the Bitcoin Payment System
 	Optimal Taxation with Private Insurance
 	Measuring Bias in Consumer Lending
-	Default Effects and Follow-On Behaviour: Evidence from An Electricity Pricing Program
+	***Default Effects and Follow-On Behaviour: Evidence from An Electricity Pricing Program
 	The Value of Unemployment Insurance
 	Workforce Composition, Productivity, and Labour Regulations in a Compensating Differentials Theory of Informality
-	Rules without Commitment: Reputation and Incentives
+	***Rules without Commitment: Reputation and Incentives
 	Shadow Banking and the Four Pillars of Traditional Financial Intermediation
 	Non-parametric Analysis of Time-Inconsistent Preferences
 	Variation Margins, Fire Sales, and Information-constrained Optimality
