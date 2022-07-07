@@ -16,6 +16,11 @@
 **/*.csv 
 
 
+## Ignore fuzzy-matching and hand-selection reports
+*_fuzzy_matching_report.txt
+**/*_hand_selection_report.txt
+
+
 # Ignore previous work because of lots of large files
 ZheFuLiWork/
 
