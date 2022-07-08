@@ -1,5 +1,5 @@
 Journals of Interest
-Journal Name {PUB_CODE} (ISSN)
+See below for example formats: "- Journal Name - {PUB_CODE} (ISSN)"
 
 TOP 5:
 - American Economic Review - {AER} (00028282)
