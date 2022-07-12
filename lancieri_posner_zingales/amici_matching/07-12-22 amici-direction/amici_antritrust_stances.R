@@ -10,6 +10,17 @@ data_in <- read_excel('antitrust_amici_per_case v3.xlsx')
 
 
 
+
+# 'antitrust_amici_per_case c4.csv' NOTES
+# 
+# From V3:
+#   - V4 has changed the name of 'direction' to 'brief_direction'
+# - Therein '1' used to indicate the petitioner, '2' neither, and '3' the respondent
+# - These have been coerced to identify the type of party (eg. gov/union/company etc.)
+
+
+
+
 governments_vector <- c(
   'Bigger City Government',
   'City government',
@@ -32,26 +43,6 @@ associations_vector <- c(
   'State Bar Association',
   'Union'
 )
-
-data_mod <- data_in %>%
-  rename('brief_direction' = 'direction:\r\n1 = petitioner\r\n2 = neither\r\n3 = Respondent',
-         'brief_favors' = 'TypeAmici\r\n')
-
-# data_mod <- data_mod %>%
-#   mutate(brief_favors_type = case_when(
-#            brief_direction == '1' ~ party1,
-#            brief_direction == '3' ~ party2,
-#            brief_direction == '2' ~ 'Favors neither party',
-#            is.na(brief_direction) ~ 'none'
-#            ),
-#          brief_favors_type = case_when(
-#            brief_favors_type %in% governments_vector ~ 'Government',
-#            brief_favors_type %in% companies_vector ~ 'Company',
-#            brief_favors_type %in% associations_vector ~ 'Association',
-#            TRUE ~ brief_favors_type
-#          ),
-#          pre_1975 = ifelse(opinionYear <= 1975, 'Pre-1975', 'Post-1975')) %>%
-#   filter(!is.na(opinionYear))
 
 data_mod <- data_in %>%
   rename('brief_direction' = 'direction:\r\n1 = petitioner\r\n2 = neither\r\n3 = Respondent',
@@ -88,14 +79,18 @@ data_mod <- data_in %>%
       brief_favors_party_type == 'Individual' & (party1 %in% companies_vector | party2 %in% companies_vector) ~ 'Favors enforcement',
       brief_favors_party_type %in% c('Government', 'Individual') & (party1 %in% associations_vector | party2 %in% associations_vector) ~ 'Favors enforcement',
       brief_favors_party_type == 'Favors neither' ~ 'Neither favors nor opposes'),
-    pre_post_1975 = ifelse(year <= 1975, '1953-1974', '1975-2012')) %>%
-  select(Title, year, party1, party2, brief_direction, brief_favors_party_type, brief_favors_enforcement_type, pre_post_1975)
-
-data_mod %>% 
-  filter(is.na(brief_favors_enforcement_type)) %>%
-  view()
+    pre_post_1975 = ifelse(year <= 1975, '1953-1974', '1975-2012'))
+  # select(Title, year, party1, party2, brief_direction, brief_favors_party_type, brief_favors_enforcement_type, pre_post_1975)
 
 
+
+# Diagnostic/exploration use:
+# data_mod %>% 
+#   filter(is.na(brief_favors_enforcement_type),
+#          brief_favors_party_type != 'None') %>%
+#   view()
+# 
+# 
 
 
 
@@ -137,4 +132,10 @@ ggplot(data_mod)+
   facet_wrap(~brief_favors_enforcement_type)
 
 ggsave(filename='fig2.png', plot=last_plot())
+
+
+
+data_mod %>% 
+  write_csv('antitrust_amici_per_case v4.csv')
+
 
