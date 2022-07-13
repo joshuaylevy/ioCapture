@@ -5,7 +5,7 @@ library(tidyverse)
 library(stargazer)
 library(readxl)
 library(hrbrthemes)
-
+`%notin%` <- Negate(`%in%`)
 data_in <- read_excel('antitrust_amici_per_case v3.xlsx')
 
 
@@ -137,5 +137,45 @@ ggsave(filename='fig2.png', plot=last_plot())
 
 data_mod %>% 
   write_csv('antitrust_amici_per_case v4.csv')
+
+##################################################################
+# Here we read in v5 which was returned by Filippo on basis of hand-coding
+# some 'brief_favors_enforcement_type' values to 'N/A', 'None' and 'Not Determined'
+
+### WE USE THE 'year' VARIABLE **NOT** 'opinionYear'
+
+data_in_for_flourish <- read_excel('antitrust_amici_per_case v5.xlsx')
+
+
+
+df_fig1 <- data_in_for_flourish %>%
+  filter(brief_favors_enforcement_type %notin% c('No Brief', 'N/A')) %>%
+  select(year, brief_favors_enforcement_type, pre_post_1975) %>%
+  mutate(pre_post_1975 = ifelse(year < 1975, '1953-1974', '1975-2013')) %>%
+  group_by(year, pre_post_1975, brief_favors_enforcement_type) %>%
+  mutate(brief_favors_enforcement_type_count = n()) %>%
+  distinct() %>%
+  pivot_wider(names_from=brief_favors_enforcement_type,
+              values_from=brief_favors_enforcement_type_count) %>%
+  view() %>%
+  write_csv('amici_per_case_flourish_data_distribution.csv')
+
+
+
+df_fig2 <- data_in_for_flourish %>%
+  filter(brief_favors_enforcement_type %notin% c('No Brief', 'N/A')) %>%
+  mutate(pre_post_1975 = ifelse(year < 1975, '1953-1974', '1975-2013')) %>%
+  select(brief_favors_enforcement_type, pre_post_1975) %>%
+  group_by(pre_post_1975, brief_favors_enforcement_type) %>%
+  mutate(brief_favors_enforcement_type_count = n()) %>% 
+  distinct(pre_post_1975, brief_favors_enforcement_type, .keep_all = TRUE) %>%
+  # view()
+  pivot_wider(names_from=pre_post_1975,
+              values_from=brief_favors_enforcement_type_count) %>%
+  view() %>%
+  write_csv('amici_per_case_flourish_data_bars.csv')
+
+
+
 
 
