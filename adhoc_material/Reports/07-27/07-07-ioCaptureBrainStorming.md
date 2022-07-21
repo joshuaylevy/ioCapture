@@ -42,3 +42,12 @@ Summary statistics for the data we gathered in general
 - Search per consult, all articles in the SCOPUS database
 
 
+## Questions to ask:
+- How much of the long-tail of unmatched articles do we want to keep?
+- Discussing the ALJ (and the three types of journals that we have (Association/Department/Corporate))
+- How do we want to use the editor-database?
+  -  How do we standardize editor-titles between journals?
+     -  Chiefs v non-chiefs
+  -  The consultants' share of the editorial staff for any given volume
+-  IRB approval (particularly if we want to surveying people)
+-  How are we going to code the anti-trust positions of given articles?
