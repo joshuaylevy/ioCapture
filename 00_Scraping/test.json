@@ -1,294 +1,132 @@
-{
-    "abstracts-retrieval-response": {
-        "item": {
-            "ait:process-info": {
-                "ait:status": {
-                    "@state": "update",
-                    "@type": "core",
-                    "@stage": "S300"
-                },
-                "ait:date-delivered": {
-                    "@day": "29",
-                    "@timestamp": "2021-11-29T01:23:17.000017-05:00",
-                    "@year": "2021",
-                    "@month": "11"
-                },
-                "ait:date-sort": {
-                    "@day": "01",
-                    "@year": "2020",
-                    "@month": "05"
-                }
-            },
-            "xocs:meta": {
-                "xocs:funding-list": {
-                    "@pui-match": "primary",
-                    "@has-funding-info": "1",
-                    "xocs:funding-addon-generated-timestamp": "2021-06-02T22:14:24.705Z",
-                    "xocs:funding-addon-type": "http://vtw.elsevier.com/data/voc/AddOnTypes/50.7/aggregated-refined"
-                }
-            },
-            "bibrecord": {
-                "head": {
-                    "citation-title": "Erratum: CEO Behavior and Firm Performance (Journal of Political Economy 128, 4 (2020): 1325–1369, 10.1086/705331)",
-                    "abstracts": "© 2020, University of Chicago Press. All rights reserved.The order of authors for Bandiera et al., published in JPE’s April 2020 (vol. 128, no. 4) issue, is incorrect. The correct author order (and citation) is Oriana Bandiera, Stephen Hansen, Andrea Prat, and Raffaella Sadun, “CEO Behavior and Firm Performance,” Journal of Political Economy 128, no. 4 (April 2020): 1325–1369. https://doi.org/10.1086/705331.",
-                    "related-item": {
-                        "itemid": {
-                            "$": "631160040",
-                            "@idtype": "relatedPUI"
-                        },
-                        "citation-title": "Ceo behavior and firm performance",
-                        "@type": "original",
-                        "citation-info": {
-                            "citation-type": {
-                                "@code": "ar"
-                            },
-                            "citation-language": {
-                                "@language": "English",
-                                "@xml:lang": "eng"
-                            },
-                            "abstract-language": {
-                                "@language": "English",
-                                "@xml:lang": "eng"
-                            }
-                        },
-                        "source": {
-                            "sourcetitle-abbrev": "J. Polit. Econ.",
-                            "website": {
-                                "ce:e-address": {
-                                    "$": "www.journals.uchicago.edu/JPE/home.html",
-                                    "@type": "email"
-                                }
-                            },
-                            "@country": "usa",
-                            "translated-sourcetitle": {
-                                "$": "Journal of Political Economy",
-                                "@xml:lang": "eng"
-                            },
-                            "issn": [
-                                {
-                                    "$": "00223808",
-                                    "@type": "print"
-                                },
-                                {
-                                    "$": "1537534X",
-                                    "@type": "electronic"
-                                }
-                            ],
-                            "volisspag": {
-                                "voliss": {
-                                    "@volume": "128",
-                                    "@issue": "4"
-                                },
-                                "pagerange": {
-                                    "@first": "1325",
-                                    "@last": "1369"
-                                }
-                            },
-                            "@type": "j",
-                            "publicationyear": {
-                                "@first": "2020"
-                            },
-                            "publisher": {
-                                "publishername": "University of Chicago Press"
-                            },
-                            "sourcetitle": "Journal of Political Economy",
-                            "publicationdate": {
-                                "month": "04",
-                                "year": "2020",
-                                "day": "01"
-                            }
-                        },
-                        "ce:doi": "10.1086/705331"
-                    },
-                    "citation-info": {
-                        "citation-type": {
-                            "@code": "er"
-                        },
-                        "citation-language": {
-                            "@language": "English",
-                            "@xml:lang": "eng"
-                        },
-                        "abstract-language": {
-                            "@language": "English",
-                            "@xml:lang": "eng"
-                        }
-                    },
-                    "source": {
-                        "sourcetitle-abbrev": "J. Polit. Econ.",
-                        "website": {
-                            "ce:e-address": {
-                                "$": "www.journals.uchicago.edu/JPE/home.html",
-                                "@type": "email"
-                            }
-                        },
-                        "@country": "usa",
-                        "translated-sourcetitle": {
-                            "$": "Journal of Political Economy",
-                            "@xml:lang": "eng"
-                        },
-                        "issn": [
-                            {
-                                "$": "1537534X",
-                                "@type": "electronic"
-                            },
-                            {
-                                "$": "00223808",
-                                "@type": "print"
-                            }
-                        ],
-                        "volisspag": {
-                            "voliss": {
-                                "@volume": "128",
-                                "@issue": "5"
-                            },
-                            "pagerange": {
-                                "@first": "2017"
-                            }
-                        },
-                        "@type": "j",
-                        "publicationyear": {
-                            "@first": "2020"
-                        },
-                        "publisher": {
-                            "publishername": "University of Chicago Press"
-                        },
-                        "sourcetitle": "Journal of Political Economy",
-                        "@srcid": "24404",
-                        "publicationdate": {
-                            "month": "05",
-                            "year": "2020",
-                            "date-text": {
-                                "@xfab-added": "true",
-                                "$": "1 May 2020"
-                            },
-                            "day": "01"
-                        }
-                    },
-                    "enhancement": {
-                        "classificationgroup": {
-                            "classifications": [
-                                {
-                                    "@type": "ASJC",
-                                    "classification": "2002"
-                                },
-                                {
-                                    "@type": "SUBJABBR",
-                                    "classification": "ECON"
-                                }
-                            ]
-                        }
-                    }
-                },
-                "item-info": {
-                    "copyright": {
-                        "$": "Copyright 2021 Elsevier B.V., All rights reserved.",
-                        "@type": "Elsevier"
-                    },
-                    "dbcollection": [
-                        {
-                            "$": "GEO"
-                        },
-                        {
-                            "$": "SCOPUS"
-                        },
-                        {
-                            "$": "Scopusbase"
-                        }
-                    ],
-                    "history": {
-                        "date-created": {
-                            "@day": "27",
-                            "@timestamp": "BST 09:13:57",
-                            "@year": "2021",
-                            "@month": "09"
-                        }
-                    },
-                    "itemidlist": {
-                        "itemid": [
-                            {
-                                "$": "631728480",
-                                "@idtype": "PUI"
-                            },
-                            {
-                                "$": "925677457",
-                                "@idtype": "CAR-ID"
-                            },
-                            {
-                                "$": "5900577",
-                                "@idtype": "GEO"
-                            },
-                            {
-                                "$": "20201631805",
-                                "@idtype": "SCOPUS"
-                            },
-                            {
-                                "$": "85085229705",
-                                "@idtype": "SCP"
-                            },
-                            {
-                                "$": "85085229705",
-                                "@idtype": "SGR"
-                            }
-                        ],
-                        "ce:doi": "10.1086/709252"
-                    }
-                },
-                "tail": "None"
-            }
-        },
-        "coredata": {
-            "srctype": "j",
-            "prism:issueIdentifier": "5",
-            "eid": "2-s2.0-85085229705",
-            "dc:description": "© 2020, University of Chicago Press. All rights reserved.The order of authors for Bandiera et al., published in JPE’s April 2020 (vol. 128, no. 4) issue, is incorrect. The correct author order (and citation) is Oriana Bandiera, Stephen Hansen, Andrea Prat, and Raffaella Sadun, “CEO Behavior and Firm Performance,” Journal of Political Economy 128, no. 4 (April 2020): 1325–1369. https://doi.org/10.1086/705331.",
-            "prism:coverDate": "2020-05-01",
-            "prism:aggregationType": "Journal",
-            "prism:url": "https://api.elsevier.com/content/abstract/scopus_id/85085229705",
-            "subtypeDescription": "Erratum",
-            "link": [
+[
+    {
+        "affiliation": {
+            "country": "Austria",
+            "@afid": "60022457",
+            "@country": "aut",
+            "organization": [
                 {
-                    "@_fa": "true",
-                    "@rel": "self",
-                    "@href": "https://api.elsevier.com/content/abstract/scopus_id/85085229705"
+                    "$": "Department of Economics"
                 },
                 {
-                    "@_fa": "true",
-                    "@rel": "scopus",
-                    "@href": "https://www.scopus.com/inward/record.uri?partnerID=HzOxMe3b&scp=85085229705&origin=inward"
-                },
-                {
-                    "@_fa": "true",
-                    "@rel": "scopus-citedby",
-                    "@href": "https://www.scopus.com/inward/citedby.uri?partnerID=HzOxMe3b&scp=85085229705&origin=inward"
+                    "$": "University of Graz"
                 }
             ],
-            "prism:publicationName": "Journal of Political Economy",
-            "source-id": "24404",
-            "citedby-count": "0",
-            "prism:volume": "128",
-            "subtype": "er",
-            "dc:title": "Erratum: CEO Behavior and Firm Performance (Journal of Political Economy 128, 4 (2020): 1325–1369, 10.1086/705331)",
-            "openaccess": "1",
-            "openaccessFlag": "true",
-            "prism:doi": "10.1086/709252",
-            "prism:issn": "1537534X 00223808",
-            "prism:startingPage": "2017",
-            "dc:identifier": "SCOPUS_ID:85085229705",
-            "dc:publisher": "University of Chicago Press"
+            "affiliation-id": {
+                "@afid": "60022457",
+                "@dptid": "100288549"
+            },
+            "@affiliation-instance-id": "2014176023-4960c6c80177e773be579ec005896eca",
+            "ce:source-text": "Department of Economics, University of Graz",
+            "@dptid": "100288549"
         },
-        "idxterms": "None",
-        "language": "None",
-        "authkeywords": "None",
-        "subject-areas": {
-            "subject-area": [
-                {
-                    "@_fa": "true",
-                    "$": "Economics and Econometrics",
-                    "@code": "2002",
-                    "@abbrev": "ECON"
-                }
-            ]
+        "author": [
+            {
+                "ce:given-name": "Michael",
+                "preferred-name": {
+                    "ce:given-name": "Michael",
+                    "ce:initials": "M.",
+                    "ce:surname": "Greinecker",
+                    "ce:indexed-name": "Greinecker M."
+                },
+                "@author-instance-id": "2014176023-5caa8db35ac4508ff826cbd5a8e94607",
+                "@seq": "1",
+                "ce:initials": "M.",
+                "@_fa": "true",
+                "@type": "auth",
+                "ce:surname": "Greinecker",
+                "@auid": "56190679200",
+                "ce:indexed-name": "Greinecker M."
+            }
+        ]
+    },
+    {
+        "affiliation": {
+            "country": "Germany",
+            "@afid": "60085150",
+            "@country": "deu",
+            "organization": {
+                "$": "Mercedes-Benz AG"
+            },
+            "affiliation-id": {
+                "@afid": "60085150"
+            },
+            "@affiliation-instance-id": "2014176023-63ffaaf3d97d0c734216c94068ad08fc",
+            "ce:source-text": "Mercedes-Benz AG"
         },
-        "authors": "None"
+        "author": [
+            {
+                "ce:given-name": "Christopher",
+                "preferred-name": {
+                    "ce:given-name": "Christopher",
+                    "ce:initials": "C.",
+                    "ce:surname": "Kah",
+                    "ce:indexed-name": "Kah C."
+                },
+                "@author-instance-id": "2014176023-ca66a003793c741603e8289a75e9fc11",
+                "@seq": "2",
+                "ce:initials": "C.",
+                "@_fa": "true",
+                "@type": "auth",
+                "ce:surname": "Kah",
+                "@auid": "57223844454",
+                "ce:indexed-name": "Kah C."
+            }
+        ]
     }
+]
+
+{
+    "affiliation": {
+        "city-group": "Berkeley CA 94720, CA",
+        "country": "United States",
+        "@afid": "60025038",
+        "@country": "usa",
+        "organization": [
+            {
+                "$": "Univ. California"
+            },
+            {
+                "$": "dep. agricultural resource economics"
+            }
+        ],
+        "affiliation-id": {
+            "@afid": "60025038",
+            "@dptid": "104262241"
+        },
+        "@dptid": "104262241"
+    },
+    "author": [
+        {
+            "preferred-name": {
+                "ce:given-name": "L. K.",
+                "ce:initials": "L.K.",
+                "ce:surname": "Simon",
+                "ce:indexed-name": "Simon L."
+            },
+            "@seq": "1",
+            "ce:initials": "L.K.",
+            "@date-locked": "2017-04-23T15:56:06.956",
+            "@_fa": "true",
+            "@type": "auth",
+            "ce:surname": "Simon",
+            "@auid": "7401615259",
+            "ce:indexed-name": "Simon L.K."
+        },
+        {
+            "preferred-name": {
+                "ce:given-name": "M. B.",
+                "ce:initials": "M.B.",
+                "ce:surname": "Stinchcombe",
+                "ce:indexed-name": "Stinchcombe M."
+            },
+            "@seq": "2",
+            "ce:initials": "M.B.",
+            "@_fa": "true",
+            "@type": "auth",
+            "ce:surname": "Stinchcombe",
+            "@auid": "6602889656",
+            "ce:indexed-name": "Stinchcombe M.B."
+        }
+    ]
 }
