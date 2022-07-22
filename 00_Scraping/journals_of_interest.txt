@@ -1,5 +1,6 @@
 Journals of Interest
 See below for example formats: "- Journal Name - {PUB_CODE} (ISSN)"
+NOTES
 Journal of Economics and Management Strategy has two working ISSNs (we use (10586407) for collecting from EconLit)
 
 TOP 5:
