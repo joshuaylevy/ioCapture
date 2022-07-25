@@ -6,7 +6,7 @@
 
 # MISC. Joshua's personal ignores
 00_Scraping/test.json
-
+00_Scarping/editors_database.xlsx
 
 ## IGNORE .xml files because these are protected by EBSCOHOST copyright in EconLit
 **/*.xml
