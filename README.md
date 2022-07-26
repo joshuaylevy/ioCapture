@@ -12,14 +12,23 @@
 
 ### Reminders
 - Absolutely EVERY pandas .csv export (`df.to_csv()`) should *explicitly* note `utf-8` encoding.
+- DOI is good for identifying unique matches but it doesn't cover the entire sample. The DOI standard was only introduced in 1998 and its not clear the extent to which DOIs have retroactively been assigned to older documents. For this reason it may be better to use other fields for matching, merging etc.
 
 
 ### Technical Requirements
 - Note the requirement for the ioCapture conda environment
 
 
-##### Pacakges Required For Use (and associated dependencies):
+#### Pacakges Required For Use (and associated dependencies):
+**Python**
 - Pandas
 - BeautifulSoup4
 - lxml
 - Requests
+- PyPDF2
+
+**R**
+- tidyverse
+- scales
+- stargazer
+- pals

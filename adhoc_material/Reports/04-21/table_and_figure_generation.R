@@ -27,7 +27,7 @@ desc_col <- c(
   'Industrial Organization',
   'Business Administration and Business Economics; Marketing; Accounting; Personnel Economics',
   'Economic History',
-  'Economic Development, Innovation, Technologicla Change, and Growth',
+  'Economic Development, Innovation, Technological Change, and Growth',
   'Economic Systems',
   'Agricultural and Natural Resource Econoimcs; Environmental and Ecological Economics',
   'Urban, Rural, Regional, Real Estate, and Transportation Economics',
@@ -38,7 +38,7 @@ desc_col <- c(
 desc_short_col <- c(
   'General and Teaching',
   'History of Thought, Methodology and Approaches',
-  'Mathematical and Quantitative Methods',
+  'Methods',
   'Micro',
   'Macro and Monetary',
   'International',
@@ -50,10 +50,10 @@ desc_short_col <- c(
   'Industrial Organization',
   'Business, Marketing, and Accounting',
   'History',
-  'Development, Innovation, Technology, and Growth',
+  'Development and Technology',
   'Economic Systems',
-  'Agricultural and Natural Resource Econoimcs; Environmental and Ecological Economics',
-  'Urban, Rural, Regional, Real Estate, and Transportation Economics',
+  'Agricultural and Environmental',
+  'Urban and Transportation',
   'Misc.',
   'Special Topics'
 )
@@ -80,7 +80,7 @@ ggplot(df %>%
   ylab('Articles')+
   scale_color_discrete(name='Publication')+
   theme_minimal()
-ggsave(filename=paste0(adhoc_path, 'marketpower_count.png'), plot=last_plot())
+ggsave(filename=paste0(adhoc_path, 'marketpower_count.png'), plot=last_plot(), width=1746, height=1468, units='px')
 
 ggplot(df %>%
          group_by(year, publication) %>%
@@ -92,7 +92,7 @@ ggplot(df %>%
   ylab('Articles')+
   scale_color_discrete(name='Publication')+
   theme_minimal()
-ggsave(filename=paste0(adhoc_path, 'antitrust_count.png'), plot=last_plot())
+ggsave(filename=paste0(adhoc_path, 'antitrust_count.png'), plot=last_plot(), width=1746, height=1468, units='px')
 
 
 ggplot(df %>%
@@ -102,7 +102,7 @@ ggplot(df %>%
   ggtitle('KXX-Code share by journal')+
   ylab('Share of articles with a KXX code')+
   theme_minimal()
-ggsave(filename=paste0(adhoc_path, 'KXX_code_share.png'), plot=last_plot())
+ggsave(filename=paste0(adhoc_path, 'KXX_code_share.png'), plot=last_plot(), width=1746, height=1468, units='px')
 
 ggplot(df %>%
          mutate(publication = toupper(publication)))+
@@ -111,21 +111,22 @@ ggplot(df %>%
   ggtitle('LXX-Code share by journal')+
   ylab('Share of articles with a LXX code')+
   theme_minimal()
-ggsave(filename=paste0(adhoc_path, 'LXX_code_share.png'), plot=last_plot())
+ggsave(filename=paste0(adhoc_path, 'LXX_code_share.png'), plot=last_plot(), width=1746, height=1468, units='px')
 
 
 ggplot(df %>%
          mutate(publication=toupper(publication))%>%
          group_by(year) %>%
          mutate(L_code = sum(L_code),
-                count = sum(count)) %>%
-         select(year, L_code, count) %>%
+                count = sum(count),
+                count_less_L = count - L_code) %>%
+         select(year, L_code, count_less_L) %>%
          distinct(year, .keep_all=TRUE)%>%
-         pivot_longer(!c(year), names_to='indicator', values_to='count')%>%
-         view())+
+         pivot_longer(!c(year), names_to='indicator', values_to='count')
+         )+
   geom_area(aes(x=year, y=count, group=indicator, fill=indicator, color=indicator),
             position=position_stack(reverse=TRUE))+
-  scale_fill_discrete(breaks=c('count',
+  scale_fill_discrete(breaks=c('count_less_L',
                                'L_code'),
                       labels=c('Top 5 (and RAND)',
                                'Industrial Organization (LXX)'),
@@ -136,7 +137,7 @@ ggplot(df %>%
   labs(title='IO vs Top 5 (and RAND) Publications')+
   ylab('Articles')+
   theme_minimal()
-ggsave(filename=paste0(adhoc_path, 'LXX-code-share-area.png'), plot=last_plot())
+ggsave(filename=paste0(adhoc_path, 'LXX-code-share-area.png'), plot=last_plot(), width=1746, height=1468, units='px')
 
 
 library(scales)
@@ -168,13 +169,14 @@ ggplot(df %>%
          mutate(publication=toupper(publication))%>%
          group_by(year) %>%
          mutate(L_code = sum(L_code),
-                count = sum(count)) %>%
-         select(year, L_code, count) %>%
+                count = sum(count),
+                count_less_l = count - L_code) %>%
+         select(year, L_code, count_less_l) %>%
          distinct(year, .keep_all=TRUE)%>%
          pivot_longer(!c(year), names_to='indicator', values_to='count'))+
   geom_area(aes(x=year, y=count, group=indicator, fill=indicator, color=indicator),
             position=position_fill(reverse=TRUE))+
-  scale_fill_discrete(breaks=c('count',
+  scale_fill_discrete(breaks=c('count_less_l',
                                'L_code'),
                       labels=c('Top 5 (and RAND)',
                                'Industrial Organization (LXX)'),
@@ -185,20 +187,23 @@ ggplot(df %>%
   labs(title='IO as a share of Top 5 (and RAND) Publications')+
   ylab('Share')+
   theme_minimal()
-ggsave(filename=paste0(adhoc_path, 'LXX-code-share-area-normalized.png'), plot=last_plot())
+ggsave(filename=paste0(adhoc_path, 'LXX-code-share-area-normalized.png'), plot=last_plot(), width=1746, height=1468, units='px')
 
 
 ggplot(df %>%
          mutate(publication=toupper(publication))%>%
          group_by(year, publication) %>%
          mutate(L_code = sum(L_code),
-                count = sum(count)) %>%
-         select(year, L_code, count, publication) %>%
-         distinct(year, .keep_all=TRUE)%>%
+                count = sum(count),
+                count_less_l = count - L_code) %>%
+         select(year, L_code, count_less_l, publication) %>%
+         distinct(year, publication, .keep_all=TRUE)%>%
+         # mutate(io_share = L_code / count) %>%
          pivot_longer(!c(year, publication), names_to='indicator', values_to='count'))+
+  facet_wrap('publication')+
   geom_area(aes(x=year, y=count, group=indicator, fill=indicator, color=indicator),
             position=position_stack(reverse=TRUE))+
-  scale_fill_discrete(breaks=c('count',
+  scale_fill_discrete(breaks=c('count_less_l',
                                'L_code'),
                       labels=c('Top 5 (and RAND)',
                                'Industrial Organization (LXX)'),
@@ -208,9 +213,9 @@ ggplot(df %>%
                        direction=-1)+
   labs(title='IO vs Top 5 (and RAND) Publications, by journal')+
   ylab('Articles')+
-  theme_minimal()+
-  facet_wrap('publication')
-ggsave(filename=paste0(adhoc_path, 'LXX-code-share-area-by-journal.png'), plot=last_plot())
+  theme_minimal()
+
+ggsave(filename=paste0(adhoc_path, 'LXX-code-share-area-by-journal.png'), plot=last_plot(), width=1746, height=1468, units='px')
 
 io_share_journal_table <- df %>%
   mutate(publication=toupper(publication))%>%
@@ -295,7 +300,7 @@ ggplot(df %>%
   ylab('Share')+
   theme_minimal()+
   facet_wrap('publication')
-ggsave(filename=paste0(adhoc_path, 'LXX-code-share-area-normalized-by-journal.png'), plot=last_plot())
+ggsave(filename=paste0(adhoc_path, 'LXX-code-share-area-normalized-by-journal.png'), plot=last_plot(), width=1746, height=1468, units='px')
 
 
 ggplot(df %>%
@@ -319,7 +324,7 @@ ggplot(df %>%
   labs(title='Number of Top 5 (and RAND) publications that are wage-related (J3)')+
   ylab('Articles')+
   theme_minimal()
-ggsave(filename=paste0(adhoc_path, 'J3-vs-top5.png'), plot=last_plot())
+ggsave(filename=paste0(adhoc_path, 'J3-vs-top5.png'), plot=last_plot(), width=1746, height=1468, units='px')
 
 ggplot(df %>%
          mutate(publication=toupper(publication)) %>%
@@ -342,7 +347,7 @@ ggplot(df %>%
   labs(title='Number of Top 5 (and RAND) publications that are wage-related (J3)')+
   ylab('Articles')+
   theme_minimal()
-ggsave(filename=paste0(adhoc_path, 'J3-vs-top5-normalized.png'), plot=last_plot())
+ggsave(filename=paste0(adhoc_path, 'J3-vs-top5-normalized.png'), plot=last_plot(), width=1746, height=1468, units='px')
 
 
 ggplot(df %>%
@@ -350,13 +355,14 @@ ggplot(df %>%
          group_by(year) %>%
          mutate(J3_code = sum(J3_code),
                 L4_code = sum(L4_code),
-                count = sum(count)) %>%
-         select(year, J3_code, L4_code, count) %>%
+                count = sum(count),
+                count_less_l4_j3 = count - L4_code - J3_code) %>%
+         select(year, J3_code, L4_code, count_less_l4_j3) %>%
          distinct(year, .keep_all=TRUE) %>%
          pivot_longer(!c(year), names_to='indicator', values_to='count'))+
   geom_area(aes(x=year, y=count, group=indicator, fill=indicator, color=indicator),
             position=position_stack(reverse=TRUE))+
-  scale_fill_discrete(breaks=c('count',
+  scale_fill_discrete(breaks=c('count_less_l4_j3',
                                'J3_code',
                                'L4_code'),
                       labels=c('Top 5 (and RAND)',
@@ -369,7 +375,7 @@ ggplot(df %>%
   labs(title='Top 5, J3 (wages) and L4 (anti-trust) articles')+
   ylab('Articles')+
   theme_minimal()
-ggsave(filename=paste0(adhoc_path, 'j3-l4-top5.png'), plot=last_plot())
+ggsave(filename=paste0(adhoc_path, 'j3-l4-top5.png'), plot=last_plot(), width=1746, height=1468, units='px')
 
 
 
@@ -378,13 +384,14 @@ ggplot(df %>%
          group_by(year) %>%
          mutate(J3_code = sum(J3_code),
                 L4_code = sum(L4_code),
-                count = sum(count)) %>%
-         select(year, J3_code, L4_code, count) %>%
+                count = sum(count),
+                count_less_l4_j3 = count - L4_code - J3_code) %>%
+         select(year, J3_code, L4_code, count_less_l4_j3) %>%
          distinct(year, .keep_all=TRUE) %>%
          pivot_longer(!c(year), names_to='indicator', values_to='count'))+
   geom_area(aes(x=year, y=count, group=indicator, fill=indicator, color=indicator),
             position=position_fill(reverse=TRUE))+
-  scale_fill_discrete(breaks=c('count',
+  scale_fill_discrete(breaks=c('count_less_l4_j3',
                                'J3_code',
                                'L4_code'),
                       labels=c('Top 5 (and RAND)',
@@ -397,7 +404,7 @@ ggplot(df %>%
   labs(title='Top 5, J3 (wages) and L4 (anti-trust) articles')+
   ylab('Articles')+
   theme_minimal()
-ggsave(filename=paste0(adhoc_path, 'j3-l4-top5-normalized.png'), plot=last_plot())
+ggsave(filename=paste0(adhoc_path, 'j3-l4-top5-normalized.png'), plot=last_plot(), width=1746, height=1468, units='px')
 
 
 
@@ -432,10 +439,9 @@ indicators_count_df <- indicators_df %>%
     'anti_trust_indicator',
     'market_power_indicator',
     'contains_theory'), sum_func) %>%
-  view()
   distinct(publication, year, .keep_all = TRUE)%>% 
   select(-c(index, date, title, abstract,jel_code, L_code, K_code, D4_code, O3_code, G34_code,L40_code, L41_code, L42_code, L43_code, L44_code, L49_code))%>% 
-  pivot_longer(!c(publication, year, L_code_count), names_to='indicator', values_to='count') %>%
+  pivot_longer(!c(publication, year, L_code_count), names_to='indicator', values_to='count')
 
 #LX codes by journal by year (COUNT)
 ggplot(indicators_count_df %>%
@@ -470,7 +476,7 @@ ggplot(indicators_count_df %>%
        caption = 'Note: Articles can mention more than one LX code, so the publication-year count may exceed the number of L-code articles')+
   ylab('Articles')+
   facet_wrap('publication')
-ggsave(filename=paste0(adhoc_path, 'LX-breakdown-count-by-journal.png'), plot=last_plot())
+ggsave(filename=paste0(adhoc_path, 'LX-breakdown-count-by-journal.png'), plot=last_plot(), width=1746, height=1468, units='px')
 
 #LX codes by year (COUNT)
 ggplot(indicators_count_df %>%
@@ -505,7 +511,7 @@ ggplot(indicators_count_df %>%
   labs(title = 'Number of articles labelled with LX JEL Codes',
        caption = 'Note: Articles can mention more than one LX code, so the publication-year count may exceed the number of L-code articles')+
   ylab('Articles')
-ggsave(filename=paste0(adhoc_path, 'LX-breakdown-count.png'), plot=last_plot())
+ggsave(filename=paste0(adhoc_path, 'LX-breakdown-count.png'), plot=last_plot(), width=1746, height=1468, units='px')
 
 
 #ANTI-TRUST IN ABSTRACT by year (COUNT)
@@ -535,7 +541,7 @@ ggplot(indicators_count_df %>%
   labs(title = 'Number of articles that mention "anti-trust" in the abstract',
        caption = 'Note: Articles without an LX code can still mention antitrust in an abstract, so total counts may not be accurate')+
   ylab('Aritlces')
-ggsave(filename=paste0(adhoc_path, 'anti-trust-in-abstract.png'), plot=last_plot())
+ggsave(filename=paste0(adhoc_path, 'anti-trust-in-abstract.png'), plot=last_plot(), width=1746, height=1468, units='px')
 
 
 #ANTI-TRUST IN ABSTRACT by year (COUNT)
@@ -563,7 +569,7 @@ ggplot(indicators_count_df %>%
   facet_wrap('publication')+
   labs(title = 'Number of articles that mention "anti trust" in the abstract',
        caption = 'Note: Articles without an LX code can still mention antitrust in an abstract, so total counts may not be accurate')
-ggsave(filename=paste0(adhoc_path, 'anti-trust-in-abstract-by-journal.png'), plot=last_plot())
+ggsave(filename=paste0(adhoc_path, 'anti-trust-in-abstract-by-journal.png'), plot=last_plot(), width=1746, height=1468, units='px')
 
 
 ggplot(indicators_count_df %>%
@@ -589,7 +595,7 @@ ggplot(indicators_count_df %>%
                        direction=-1)+
   ylab('Articles')+
   theme_minimal()
-ggsave(filename=paste0(adhoc_path, 'L4-vs-LXX.png'), plot=last_plot())
+ggsave(filename=paste0(adhoc_path, 'L4-vs-LXX.png'), plot=last_plot(), width=1746, height=1468, units='px')
 
 ggplot(indicators_count_df %>%
          filter(indicator %in% c('L4_code')) %>%
@@ -615,7 +621,7 @@ ggplot(indicators_count_df %>%
   ylab('Articles')+
   theme_minimal()+
   facet_wrap('publication')
-ggsave(filename=paste0(adhoc_path, 'L4-vs-LXX-by-journal.png'), plot=last_plot())
+ggsave(filename=paste0(adhoc_path, 'L4-vs-LXX-by-journal.png'), plot=last_plot(), width=1746, height=1468, units='px')
 
 
 
@@ -646,7 +652,7 @@ ggplot(indicators_count_df %>%
                        direction=-1)+
   ylab('Share')+
   theme_minimal()
-ggsave(filename=paste0(adhoc_path, 'L4-vs-LXX-normalized.png'), plot=last_plot())
+ggsave(filename=paste0(adhoc_path, 'L4-vs-LXX-normalized.png'), plot=last_plot(), width=1746, height=1468, units='px')
 
 
 
@@ -675,7 +681,7 @@ ggplot(indicators_count_df %>%
   ylab('Articles')+
   theme_minimal()+
   facet_wrap('publication')
-ggsave(filename=paste0(adhoc_path, 'L4-vs-LXX-normalized-by_journal.png'), plot=last_plot())
+ggsave(filename=paste0(adhoc_path, 'L4-vs-LXX-normalized-by_journal.png'), plot=last_plot(), width=1746, height=1468, units='px')
 
 
 ggplot(indicators_count_df %>%
@@ -701,7 +707,7 @@ ggplot(indicators_count_df %>%
   ylab('Articles')+
   theme_minimal()+
   facet_wrap('publication')
-ggsave(filename=paste0(adhoc_path, 'L4-vs-LXX-normalized-by_journal.png'), plot=last_plot())
+ggsave(filename=paste0(adhoc_path, 'L4-vs-LXX-normalized-by_journal.png'), plot=last_plot(), width=1746, height=1468, units='px')
 
 
 
@@ -726,7 +732,7 @@ ggplot(df %>%
   labs(title='Number of Top 5 (and RAND) publications that are anti-trust (L4)')+
   ylab("Aritlces")+
   theme_minimal()
-ggsave(filename=paste0(adhoc_path, 'L4-vs-top5.png'), plot=last_plot())
+ggsave(filename=paste0(adhoc_path, 'L4-vs-top5.png'), plot=last_plot(), width=1746, height=1468, units='px')
 
 
 ggplot(df %>%
@@ -750,7 +756,7 @@ ggplot(df %>%
   labs(title='Share of Top 5 (and RAND) publications that are anti-trust (L4)')+
   ylab("Share")+
   theme_minimal()
-ggsave(filename=paste0(adhoc_path, 'L4-vs-top5-normalized.png'), plot=last_plot())
+ggsave(filename=paste0(adhoc_path, 'L4-vs-top5-normalized.png'), plot=last_plot(), width=1746, height=1468, units='px')
 
 ggplot(df %>%
          select(year, publication, L4_code, count)%>%
@@ -775,7 +781,7 @@ ggplot(df %>%
   ylab("Aritlces")+
   theme_minimal()+
   facet_wrap('publication')
-ggsave(filename=paste0(adhoc_path, 'L4-vs-top5-by-journal.png'), plot=last_plot())
+ggsave(filename=paste0(adhoc_path, 'L4-vs-top5-by-journal.png'), plot=last_plot(), width=1746, height=1468, units='px')
 
 
 ggplot(df %>%
@@ -800,7 +806,7 @@ ggplot(df %>%
   ylab("Share")+
   theme_minimal()+
   facet_wrap('publication')
-ggsave(filename=paste0(adhoc_path, 'L4-vs-top5-normalized.png'), plot=last_plot())
+ggsave(filename=paste0(adhoc_path, 'L4-vs-top5-normalized.png'), plot=last_plot(), width=1746, height=1468, units='px')
 
 
 
@@ -831,7 +837,7 @@ ggplot(indicators_count_df %>%
        caption='*Theory codes include: C7, D11, D5, D21, D85, and D86')+
   ylab('Articles')+
   theme_minimal()
-ggsave(filename=paste0(adhoc_path, "theory-vs-LXX.png"), plot=last_plot())
+ggsave(filename=paste0(adhoc_path, "theory-vs-LXX.png"), plot=last_plot(), width=1746, height=1468, units='px')
 
 
 ggplot(indicators_count_df %>%
@@ -855,8 +861,7 @@ ggplot(indicators_count_df %>%
   ylab('Articles')+
   theme_minimal()+
   facet_wrap('publication')
-ggsave(filename=paste0(adhoc_path, 'theory-vs-LXX-by-journal.png'), plot=last_plot())
-
+ggsave(filename=paste0(adhoc_path, 'theory-vs-LXX-by-journal.png'), plot=last_plot(), width=1746, height=1468, units='px')
 
 
 # I'm omitting this figure because there are too many 0s in the data-set that make normalization functionally useless
@@ -899,7 +904,7 @@ ggplot(indicators_df %>%
        subtitle='Normalized to 1991')+
   ylab('L4 vs LXX share')+
   theme_minimal()
-ggsave(filename=paste0(adhoc_path, 'L4-vs-LXX-share-by-year-normalized'), plot=last_plot())
+ggsave(filename=paste0(adhoc_path, 'L4-vs-LXX-share-by-year-normalized'), plot=last_plot(), width=1746, height=1468, units='px')
 
 
 ggplot(indicators_df %>%
@@ -928,8 +933,21 @@ ggplot(indicators_df %>%
                       )+
   scale_color_discrete(guide='none')+
   theme_minimal()
-ggsave(filename=paste0(adhoc_path, 'L4-breakdown-count.png'), plot=last_plot())
+ggsave(filename=paste0(adhoc_path, 'L4-breakdown-count.png'), plot=last_plot(), width=1746, height=1468, units='px')
   
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -951,7 +969,7 @@ ggplot(publications_year_df %>%
   labs(title='Top 5 (and RAND) publications over time')+
   ylab('Articles')+
   theme_minimal()
-ggsave(filename=paste0(adhoc_path, 'top_5_over_time_col.png'), plot=last_plot())
+ggsave(filename=paste0(adhoc_path, 'top_5_over_time_col.png'), plot=last_plot(), width=1746, height=1468, units='px')
 
 ggplot(publications_year_df %>%
          mutate(publication = toupper(publication)))+
@@ -961,7 +979,7 @@ ggplot(publications_year_df %>%
   labs(title='Top 5 (and RAND) publication shares over time')+
   ylab('Articles')+
   theme_minimal()
-ggsave(filename=paste0(adhoc_path, 'top_5_over_time_col_shares.png'), plot=last_plot())
+ggsave(filename=paste0(adhoc_path, 'top_5_over_time_col_shares.png'), plot=last_plot(), width=1746, height=1468, units='px')
 
 ggplot(publications_year_df %>%
          mutate(publication = toupper(publication)))+
@@ -970,7 +988,7 @@ ggplot(publications_year_df %>%
   labs(title="Top 5 (and RAND) publications over time")+
   ylab('Articles')+
   theme_minimal()
-ggsave(filename=paste0(adhoc_path, 'top5_over_time.png'), plot=last_plot())
+ggsave(filename=paste0(adhoc_path, 'top5_over_time.png'), plot=last_plot(), width=1746, height=1468, units='px')
 
 publications_year_df_wide <- publications_year_df %>%
   mutate(publication = toupper(publication)) %>%
@@ -986,7 +1004,7 @@ stargazer(publications_year_df_wide %>% column_to_rownames(var='Year'),
 
 
 
-
+#### TOP 5 PREDOMINANT AND WEIGHTED-FREQUENCY JEL CODES
 
 jel_normalized_df <- read_csv(paste0(adhoc_path, 'top_five_jel_breakdown.csv'))
 jel_normalized_unnested_df <- read_csv(paste0(adhoc_path, 'top_five_jel_unnested.csv'))
@@ -1006,7 +1024,8 @@ ggplot(jel_normalized_df %>%
          pivot_longer(!c('publication', 'predom_jel'),
                       names_to = 'year',
                       values_to = 'predom_jel_count') %>%
-         mutate(year = as.numeric(year)))+
+         mutate(year = as.numeric(year)) %>%
+         filter(predom_jel != 'Y'))+
   geom_area(aes(x=year, y=predom_jel_count, group=predom_jel, color=predom_jel, fill=predom_jel))+
   scale_fill_manual(values=unname(alphabet(n=length(unique(jel_normalized_df$predom_jel %>% na.omit())))),
                     breaks = jel_alpha_descriptions$code_col,
@@ -1020,18 +1039,35 @@ ggplot(jel_normalized_df %>%
 ggsave(paste0(adhoc_path, 'jel_predom_by_journal.png'), plot=last_plot(), height=8.5, width=11, units='in')
 
 
-
-  ggplot(jel_normalized_df %>%
+ggplot(jel_normalized_df %>%
          filter(year %notin% c(1990, 2021)) %>%
-         na.omit() %>% 
-         select(title, year, publication, predom_jel) %>%
+         na.omit() %>%
+         select(title, year, predom_jel) %>%
          group_by(year) %>%
-         count(predom_jel) %>% 
-         rename('predom_jel_count'  = 'n') %>%
-         distinct(year, predom_jel, .keep_all = TRUE))+
-  geom_area(aes(x=year, y=predom_jel_count, group=predom_jel, color='black', fill=predom_jel),
-            position=position_stack())+
+         count(predom_jel) %>%
+         rename('predom_jel_count' = 'n') %>%
+         distinct(year, predom_jel, .keep_all = TRUE) %>%
+         pivot_wider(names_from='year',
+                     values_from='predom_jel_count',
+                     values_fill = 0) %>%
+         pivot_longer(!c(predom_jel),
+                      names_to = 'year',
+                      values_to = 'predom_jel_count') %>%
+         mutate(year = as.numeric(year)) %>%
+         filter(predom_jel != 'Y'))+
+geom_area(aes(x=year, y=predom_jel_count, group=predom_jel, color='black', fill=predom_jel),
+          position = position_fill())+
+  scale_color_discrete(guide='none')+
+  scale_fill_manual(
+    values = unname(alphabet(n=length(unique(jel_normalized_unnested_df$jel_list_pre %>% na.omit())))),
+    breaks = jel_alpha_descriptions$code_col,
+    labels = jel_alpha_descriptions$desc_short_col,
+    name= 'JEL category:')+
+  labs(title='Distribution of topics (by JEL code) over time',
+       subtitle='Category determined by predominant category listed')+
+  ylab('Share')+
   theme_minimal()
+ggsave(paste0(adhoc_path, 'jel_predom_normalized.png'), plot=last_plot(), height=6, width=12, units='in')
 
 
 ggplot(jel_normalized_unnested_df %>%
@@ -1049,7 +1085,8 @@ ggplot(jel_normalized_unnested_df %>%
          pivot_longer(!c('jel_alpha', 'publication'),
                       names_to = 'year',
                       values_to = 'weighted_jel_count') %>%
-         mutate(year = as.numeric(year)))+
+         mutate(year = as.numeric(year)) %>%
+         filter(jel_alpha != 'Y'))+
   geom_area(aes(x=year, y=weighted_jel_count, group=jel_alpha, fill=jel_alpha, color=jel_alpha),
             position = position_fill())+
   scale_color_discrete(guide='none')+
@@ -1063,41 +1100,7 @@ ggplot(jel_normalized_unnested_df %>%
   ylab('Share')+
   theme_minimal()+
   facet_wrap('publication')
-ggsave(paste0(adhoc_path, 'jel_weighted_normalized_by_journal.png'), plot=last_plot(), height=8.5, width=11, units='in')
-
-
-ggplot(jel_normalized_unnested_df %>%
-         filter(year %notin% c(1990, 2021)) %>%
-         na.omit() %>% 
-         group_by(year, jel_list_pre) %>%
-         mutate(weighted_jel_count = sum(jel_list_elem_weight)) %>%
-         distinct(year, jel_list_pre, .keep_all = TRUE) %>%
-         select(year, jel_list_pre, weighted_jel_count) %>%
-         rename('jel_alpha' = 'jel_list_pre') %>%
-         pivot_wider(names_from = 'year',
-                     values_from = 'weighted_jel_count',
-                     values_fill = 0) %>%
-         pivot_longer(!c('jel_alpha'),
-                      names_to = 'year',
-                      values_to = 'weighted_jel_count') %>%
-         mutate(year = as.numeric(year)))+
-  geom_area(aes(x=year, y=weighted_jel_count, group=jel_alpha, color='black', fill=jel_alpha),
-           position=position_fill())+
-  scale_color_discrete(guide='none')+
-  scale_fill_manual(
-    values = unname(alphabet(n=length(unique(jel_normalized_unnested_df$jel_list_pre %>% na.omit())))),
-    breaks = jel_alpha_descriptions$code_col,
-    labels = jel_alpha_descriptions$desc_short_col,
-    name= 'JEL category:')+
-  labs(title='Distribution of topics (by JEL code) over time',
-       subtitle='Frequency weighted by number of JEL codes per article')+
-  ylab('Share')+
-  theme_minimal()
-ggsave(paste0(adhoc_path, 'jel_weighted_normalized.png'), plot=last_plot(), height=8.5, width=11, units='in')
-
-
-
-
+ggsave(paste0(adhoc_path, 'jel_weighted_normalized_by_journal.png'), plot=last_plot(), height=6, width=12, units='in')
 
 
 ggplot(jel_normalized_unnested_df %>%
@@ -1115,14 +1118,11 @@ ggplot(jel_normalized_unnested_df %>%
                       names_to = 'year',
                       values_to = 'weighted_jel_count') %>%
          mutate(year = as.numeric(year)) %>%
-         group_by(year) %>%
-         mutate(weighted_jel_totals = sum(weighted_jel_count),
-                weighted_jel_share = weighted_jel_count / weighted_jel_totals) %>%
-         ungroup() %>%
-         view())+
-  geom_line(aes(x=year, y=weighted_jel_share, group=jel_alpha, color=jel_alpha),
-            size=1.25)+
-  scale_color_manual(
+         filter(jel_alpha != 'Y'))+
+  geom_area(aes(x=year, y=weighted_jel_count, group=jel_alpha, color='black', fill=jel_alpha),
+           position=position_fill())+
+  scale_color_discrete(guide='none')+
+  scale_fill_manual(
     values = unname(alphabet(n=length(unique(jel_normalized_unnested_df$jel_list_pre %>% na.omit())))),
     breaks = jel_alpha_descriptions$code_col,
     labels = jel_alpha_descriptions$desc_short_col,
@@ -1131,7 +1131,60 @@ ggplot(jel_normalized_unnested_df %>%
        subtitle='Frequency weighted by number of JEL codes per article')+
   ylab('Share')+
   theme_minimal()
-ggsave(paste0(adhoc_path, 'jel_weighted_normalized_line.png'), plot=last_plot(), height=8.5, width=11, units='in')
+ggsave(paste0(adhoc_path, 'jel_weighted_normalized.png'), plot=last_plot(), height=8.5, width=11, units='in')
+
+
+final_year_func <- function(in_df){
+  out_df <- in_df %>%
+    filter(year == max(df$year))
+  return(out_df)
+}
+ggplot(jel_normalized_unnested_df %>%
+         filter(year %notin% c(1990, 2021)) %>%
+         na.omit() %>% 
+         group_by(year, jel_list_pre) %>%
+         mutate(weighted_jel_count = sum(jel_list_elem_weight)) %>%
+         distinct(year, jel_list_pre, .keep_all = TRUE) %>%
+         select(year, jel_list_pre, weighted_jel_count) %>%
+         ungroup() %>%
+         rename('jel_alpha' = 'jel_list_pre') %>%
+         pivot_wider(names_from = 'year',
+                     values_from = 'weighted_jel_count',
+                     values_fill = 0) %>%
+         pivot_longer(!c('jel_alpha'),
+                      names_to = 'year',
+                      values_to = 'weighted_jel_count') %>%
+         mutate(year = as.numeric(year)) %>%
+         group_by(year) %>%
+         mutate(weighted_jel_totals = sum(weighted_jel_count),
+                weighted_jel_share = weighted_jel_count / weighted_jel_totals) %>%
+         ungroup() %>%
+         group_by(jel_alpha) %>%
+         mutate(avg_weighted_jel_share = mean(weighted_jel_share)) %>%
+         arrange(avg_weighted_jel_share) %>%
+         filter(jel_alpha != 'Y') %>%
+         group_by(year) %>%
+         mutate(rand_group = ntile(avg_weighted_jel_share, n=2),
+                rand_group = ifelse(jel_alpha == 'D', 3, rand_group),
+               rand_group = -1 * rand_group) %>%
+         left_join(jel_alpha_descriptions, by = c('jel_alpha' = 'code_col')))+
+  geom_line(aes(x=year, y=weighted_jel_share, group=jel_alpha, color=jel_alpha),
+            size=1.25)+
+  geom_label_repel(data = ~ final_year_func(.x), 
+             aes(x=year, y=weighted_jel_share, group=jel_alpha, label=desc_short_col, color=jel_alpha),
+             xlim=c(1990, 2025),
+             nudge_x=1.5)+
+  scale_color_manual(
+    values = unname(alphabet(n=length(unique(jel_normalized_unnested_df$jel_list_pre %>% na.omit())))),
+    guide='none')+
+  labs(title='Distribution of topics (by JEL code) over time',
+       subtitle='Frequency weighted by number of JEL codes per article')+
+  ylab('Share')+
+  facet_grid(rows='rand_group', scales='free_y')+
+  expand_limits(x=2025)+
+  theme_minimal()+
+  theme(strip.text.y = element_blank())
+ggsave(paste0(adhoc_path, 'jel_weighted_normalized_line.png'), plot=last_plot(), height=6, width=12, units='in')
 
 
 ranking_table_df <- jel_normalized_unnested_df %>%
@@ -1164,7 +1217,7 @@ ranking_table_df <- jel_normalized_unnested_df %>%
 for (pub in c('AER', 'ECA', 'JPE', 'QJE', 'RES')) {
   stargazer(ranking_table_df %>%
               select(starts_with(pub)), 
-            font.size='footnotesize',
+            font.size='scriptsize',
             rownames = FALSE,
             summary = FALSE,
             out=paste0(adhoc_path, 'tex_tables/jel_ranking_table_', pub, '.tex'))
@@ -1175,28 +1228,7 @@ for (pub in c('AER', 'ECA', 'JPE', 'QJE', 'RES')) {
 
 
 
-
-
-
-
-
-ggplot(jel_normalized_df %>%
-         filter(year %notin% c(1990, 2021)) %>%
-         na.omit() %>%
-         group_by(year, publication) %>%
-         select(title, year, publication, first_jel) %>%
-         group_by(year) %>%
-         count(first_jel) %>%
-         rename('first_jel_count' = 'n') %>%
-         distinct(year, first_jel, .keep_all = TRUE) %>%
-         view())+
-  geom_area(aes(x=year, y=first_jel_count, group=first_jel, fill=first_jel))+
-  theme_minimal()
-
-
-
-
-table_df <- read_csv('00_Scraping/labels_for_table.csv') %>%
+table_df <- read_csv('labels_for_table.csv') %>%
   rename('Publication' = '...1')
 
 stargazer(table_df,

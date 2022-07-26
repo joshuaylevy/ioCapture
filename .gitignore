@@ -1,12 +1,24 @@
 # IMPORTANT ATTENTION NEEDED
 00_Scraping/env_keys.json
+00_Scraping/proxies.txt
 
+
+
+# MISC. Joshua's personal ignores
+00_Scraping/test.json
+00_Scraping/editors_data/editors_database.xlsx
 
 ## IGNORE .xml files because these are protected by EBSCOHOST copyright in EconLit
 **/*.xml
+00_Scraping/nber_working_papers/*.pdf
 
 ## Ignore .csv files becuase these have the off-chance of creating large files that GitHub won't handle
 **/*.csv 
+
+
+## Ignore fuzzy-matching and hand-selection reports
+*_fuzzy_matching_report.txt
+**/*_hand_selection_report.txt
 
 
 # Ignore previous work because of lots of large files
