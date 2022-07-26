@@ -5,6 +5,7 @@
 
 
 # MISC. Joshua's personal ignores
+.vscode/
 00_Scraping/test.json
 00_Scraping/editors_data/editors_database.xlsx
 
