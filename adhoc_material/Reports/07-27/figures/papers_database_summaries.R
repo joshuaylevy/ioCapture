@@ -6,7 +6,7 @@ setwd("adhoc_material/Reports/07-27/figures")
 path_prepend_00_scraping <- "../../../../00_Scraping/"
 path_prepend_01_database <- "../../../../01_Database_Construction/"
 
-
+### Generates figures that illustrate the fuzzy matching reports. Relies on a .csv in 01_Database_Construction_papers
 fuzzy_reports_read <- read_csv(paste0(path_prepend_01_database, "papers/fuzzy_match_results.csv", sep = ""))
 fuzzy_reports_df <- fuzzy_reports_read %>%
     select(-c(`...1`)) %>%
@@ -26,11 +26,7 @@ fuzzy_reports_df <- fuzzy_reports_read %>%
         ),
         pub_code = as.factor(pub_code),
         pub_code = fct_relevel(pub_code, "AER", "ECA", "JPE", "QJE", "RES", "ATB", "JEM", "JHR", "JLE", "JLO", "RJE", "JFE", "JOF", "RFS", "JOL")
-    ) %>%
-    view()
-
-
-
+    )
 
 ggplot(fuzzy_reports_df) +
     geom_col(aes(x = pub_code, y = value, fill = indicator, group = pub_code),
@@ -64,7 +60,7 @@ ggplot(fuzzy_reports_df) +
     )
 ggsave(filename = "../figures/scopus_econlit_matching_results.png", plot = last_plot(), width = 297, height = 210, units = "mm")
 
-
+### Generates .tex table that summarizes the fuzzy matching reports. Relies on a .csv in 01_Database_Construction_papers
 stargazer(fuzzy_reports_read %>%
     select(-c(`...1`, scopus_obs, econlit_obs)) %>%
     mutate(
