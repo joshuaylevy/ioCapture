@@ -10,7 +10,6 @@ path_prepend_01_database <- "../../../../01_Database_Construction/"
 ### Generates figures that illustrate the fuzzy matching reports. Relies on a .csv in 01_Database_Construction_papers
 fuzzy_reports_read <- read_csv(paste0(path_prepend_01_database, "papers/fuzzy_match_results.csv", sep = ""))
 fuzzy_reports_df <- fuzzy_reports_read %>%
-    select(-c(`...1`)) %>%
     pivot_longer(cols = -c(pub_code), names_to = "indicator", values_to = "value") %>%
     filter(indicator %in% c(
         "naive_match_obs",
@@ -50,7 +49,7 @@ ggplot(fuzzy_reports_df) +
         ),
         name = "Type:"
     ) +
-    scale_y_continuous(labels = commas) +
+    scale_y_continuous(labels = comma) +
     ggtitle("Results of Scopus-EconLit Matching") +
     xlab("") +
     ylab("Observations (articles)") +
@@ -64,14 +63,14 @@ ggsave(filename = "../figures/scopus_econlit_matching_results.png", plot = last_
 
 ### Generates .tex table that summarizes the fuzzy matching reports. Relies on a .csv in 01_Database_Construction_papers
 stargazer(fuzzy_reports_read %>%
-    select(-c(`...1`, scopus_obs, econlit_obs)) %>%
+    select(-c(scopus_obs, econlit_obs)) %>%
     mutate(
         pub_code = as.factor(pub_code),
         pub_code = fct_relevel(pub_code, "AER", "ECA", "JPE", "QJE", "RES", "ATB", "JEM", "JHR", "JLE", "JLO", "RJE", "JFE", "JOF", "RFS", "JOL")
     )  %>%
     arrange(pub_code) %>%
     mutate(pub_code = as.character(pub_code),
-        total_matched = sum(naive_match_obs, fuzzy_match_obs)) %>%
+        total_matched = naive_match_obs + fuzzy_match_obs) %>%
     rename('Journal' = pub_code,
         'Naive matches' = naive_match_obs, 
         'Fuzzy matches' = fuzzy_match_obs, 
