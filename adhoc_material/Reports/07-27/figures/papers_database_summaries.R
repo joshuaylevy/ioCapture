@@ -1,5 +1,6 @@
 library(tidyverse)
 library(stargazer)
+library(scales)
 
 print(getwd())
 setwd("adhoc_material/Reports/07-27/figures")
@@ -49,6 +50,7 @@ ggplot(fuzzy_reports_df) +
         ),
         name = "Type:"
     ) +
+    scale_y_continuous(labels = commas) +
     ggtitle("Results of Scopus-EconLit Matching") +
     xlab("") +
     ylab("Observations (articles)") +
@@ -68,12 +70,14 @@ stargazer(fuzzy_reports_read %>%
         pub_code = fct_relevel(pub_code, "AER", "ECA", "JPE", "QJE", "RES", "ATB", "JEM", "JHR", "JLE", "JLO", "RJE", "JFE", "JOF", "RFS", "JOL")
     )  %>%
     arrange(pub_code) %>%
-    mutate(pub_code = as.character(pub_code)) %>%
+    mutate(pub_code = as.character(pub_code),
+        total_matched = sum(naive_match_obs, fuzzy_match_obs)) %>%
     rename('Journal' = pub_code,
         'Naive matches' = naive_match_obs, 
         'Fuzzy matches' = fuzzy_match_obs, 
         'Scopus only' = remaining_scopus_obs, 
-        'EconLit only' = remaining_econlit_obs),
+        'EconLit only' = remaining_econlit_obs,
+        'Total' = total_matched),
     type = "latex",
     title = "Results of Scopus-EconLit Matching",
     style = "AER",
