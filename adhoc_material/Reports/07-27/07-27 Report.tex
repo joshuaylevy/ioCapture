@@ -23,7 +23,7 @@
 \usepackage{pdflscape}
 \usepackage{adjustbox}
 \usepackage{tablefootnote}
-
+% \usepackage{showframe}
 
 
 \setlength{\parindent}{0pt}
@@ -66,6 +66,7 @@
 \input{tables/output/list_of_journals.tex}
 Here is a change and another one!
 
+
 \input{tables/output/scopus_econlit_matching_results_out.tex}
 
 \begin{figure}[h]
@@ -73,6 +74,31 @@ Here is a change and another one!
     \includegraphics[width=\textwidth]{figures/scopus_econlit_matching_results.png}
     \caption{Caption text}
 \end{figure}
+
+
+\newpage
+\begin{landscape}
+    \thispagestyle{empty}
+        \input{tables/output/most_published_authors_finance_labor.tex}
+\end{landscape}
+\newpage
+\begin{landscape}
+    \thispagestyle{empty}
+        \input{tables/output/most_published_authors_top5.tex}
+\end{landscape}
+\newpage
+\begin{landscape}
+    \thispagestyle{empty}
+    \vspace{\linewidth}
+    \newgeometry{margin=0.1in}
+    \input{tables/output/most_published_authors_io_and_law.tex}
+\end{landscape}
+    
+
+    
+
+\input{tables/output/articles_per_author.tex}
+
 
 
 
