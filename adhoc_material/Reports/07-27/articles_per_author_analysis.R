@@ -70,7 +70,8 @@ stargazer(per_author_df %>%
     out = "tables/input/articles_per_author.tex",
     summary = FALSE,
     rownames = FALSE,
-    out.header = FALSE
+    out.header = FALSE,
+        notes="Symbols indicate being a consultant and affiiated with an NBER program: $^{\\dag}$: Law and Economics; $^{*}$: Industrial Organization; $^{\\dag}$: Labor Studies; $^{\\mathsection}$: Corporate Finance."
 )
 
 
@@ -128,7 +129,8 @@ top5_ranking_table <- ranking_tables %>%
         font.size = "footnotesize",
         summary = FALSE,
         rownames = FALSE, 
-        out.header = FALSE
+        out.header = FALSE,
+        notes="Symbols indicate being a consultant and affiiated with an NBER program: $^{\\dag}$: Law and Economics; $^{*}$: Industrial Organization; $^{\\dag}$: Labor Studies; $^{\\mathsection}$: Corporate Finance."
     )
 
 io_law_ranking_table <- ranking_tables %>%
@@ -144,7 +146,8 @@ io_law_ranking_table <- ranking_tables %>%
         font.size = "scriptsize",
         summary = FALSE,
         rownames = FALSE, 
-        out.header = FALSE
+        out.header = FALSE,
+        notes="Symbols indicate being a consultant and affiiated with an NBER program: $^{\\dag}$: Law and Economics; $^{*}$: Industrial Organization; $^{\\dag}$: Labor Studies; $^{\\mathsection}$: Corporate Finance."
     )
 
 finance_labor_ranking_table <- ranking_tables %>%
@@ -160,6 +163,7 @@ finance_labor_ranking_table <- ranking_tables %>%
         font.size = "footnotesize",
         summary = FALSE,
         rownames = FALSE, 
-        out.header = FALSE
+        out.header = FALSE,
+        notes="Symbols indicate being a consultant and affiiated with an NBER program: $^{\\dag}$: Law and Economics; $^{*}$: Industrial Organization; $^{\\dag}$: Labor Studies; $^{\\mathsection}$: Corporate Finance."
     )
 

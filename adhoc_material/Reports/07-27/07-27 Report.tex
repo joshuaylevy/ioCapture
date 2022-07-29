@@ -23,6 +23,7 @@
 \usepackage{pdflscape}
 \usepackage{adjustbox}
 \usepackage{tablefootnote}
+\usepackage{multicol}
 % \usepackage{showframe}
 
 
@@ -52,7 +53,7 @@
 
 \onehalfspacing
 \begin{document}
-\begin{titlepage}
+\begin{titlepage}   
     \maketitle
     \thispagestyle{empty}
 \end{titlepage}
@@ -61,26 +62,170 @@
 \newpage
 \pagenumbering{arabic}
 
+\section{Introduction}
+Academic economists regularly serve as experts in a number of policy debates. In particular, they play an outsized role in the application of antitrust law, often serving as consultants to firms as well as the government through the guideline-setting, merger, and litigation processes. Because they are often relied upon to serve as experts and because of the broad social-welfare effects of antitrust enforcement (or lack thereof), the capture of academic industrial organization economists stands to be especially pernicious.\\
+
+In many cases, senior economists with experience in the field serve as ``consultants'' to large firms which are, in turn, retained by legal counsel in the course of the mergers and acquisitions process. Consultants may help firms prepare for their merger filings and, if those applications are challenged by the government, may serve as ``expert witnesses'' in the course of ensuing litigation. The expert witness role of being a consultant is what makes academic economists potentially open to capture. Take, for example, an economist whose academic research (agenda) may run counter to the interests of the firms they represent. If such research were to be published in academic journals (which are readily available to the interested public), counter-party litigators may find that work and use it undermine the consultant's credibility or reputation as an expert during cross-examination, all to the detriment of the economist's clients. Consequently, consulting economists, not wanting to lose their well-remunerated positions as expert witnesses, may engage in self-censorship with respect to certain contentious topics that may be subject to litigation, or to be even more cautious, may abandon entire courses of research.\\
+
+This poses a number of problems. First, capture of economists detracts from the stated enterprise of the academic community: the search for truth. Abandoning that search represents tacit intellectual dishonesty (even when a scholar is resource constrained) if not an outstanding form of corruption. Second --- though no-less important --- are the indirect effects of that intellectual dishonesty. If further research on the socio-political effects of antitrust-enforcement, per se, could be demonstrated to yield positive returns (by ways of advocating for preventing mergers or for breaking up large firms, for example), abandoning that research incurs an opportunity cost for society.\\
+
+Economists who consult thus face a conflict of interests between their intellectual obligations to unbiased research and personal enrichment. We propose that the publishing behaviors of consultant academic economists (who have been captured by industry) differs systematically from their peers who do not engage in consulting. What follows is a description of the datasets that have been collected to date investigate this question.
+
+
 \section{Papers Database}
 
-\input{tables/output/list_of_journals.tex}
-Here is a change and another one!
+We begin by collecting a database of academic papers in leading general-interest and field-specific journals. The jouranls of interest are noted below in Table 1. In addition to the ``Top 5'' general-interest journals, we begin collecting the corpus of articles published in prominent field journals in 1) industrial organization (IO) and law and economics; 2) financial economics; and 3) labor economics. We are primarily interested in the role of consulting firms in antitrust enforcement so the IO field can be thought of as a ``treatment'' group. The latter two fields serve, in effect, as a kind of weak control. Financial economists and labor economists also regularly engage various consulting activities. However, those relationships are of a different nature to those of IO economists who work in antitrust because they rarely take place in an adversarial (litigated) context. So, even though financial and labor economists may also face material conflicts of interest, they are not necessarily open to capture in the same way that IO economists are. 
 
+\input{tables/output/list_of_journals.tex}
+
+\subsection{Sources}
+We are interested in understanding the patterns of publishing behavior by consulting and non-consulting economists. So, we are primarily interested in article meta-data. We begin by turning to two different sources:
+
+\subsubsection{Scopus}
+Scopus is a bibliometric and citation service produced and maintained by Elsevier, a publishing company. Scopus is attractive as data source because it systematically covers many of the dimensions of interest. It contains paper-level and author-level meta-data. Most importantly, it generates a unique ``author ID'' for every author. This becomes the foreign key by which we can match individuals with a vast array of other data.
+
+\subsubsection{EconLit}
+EconLit is another bibliometric service maintained by EBSCOHost. In contrast to Scopus, which covers all disciplines and fields of study, EconLit covers exclusively Economics journals. Moreover, because EconLit is primarily focussed on papers as the unit of analysis, EBSCOHost does not engage in the same kind of standardization that Elsevier does. Consequently, the database is not as ``relational'' as Scopus is. An author who appears as ``L. Zingales'' in one journal article is not associated with the ``Luigi Zingales'' who appears in a different journal, even though they are the same person.\\
+
+In contrast to Scopus however, the disciplinary focus of EconLit means that it carries ``Journal of Economic Literature (JEL) codes.'' JEL codes are alphanumeric codes chosen by article authors that describe the fields that a paper pertains to. For example, an author of a paper about vertical restraints might label her paper with ``L42'' the code that corresponds to ``Vertical Restraints; Resale Price Maintenance; and Quantity Discounts.'' Each character in a JEL code represents a certain degree of specificity: the first alphabetic character identifies the broadest relevant field, and the first and second numbers indicate increasingly specific sub-fields and topics.\\
+
+The presence of JEL codes on EconLit-derived observations allows us to determine the focus of the article beyond what can be inferred from the title and publication, without having to read it in full. JEL codes additionally can be used to characterize how the literature changes in focus over time.\footnote{The \textit{Antitrust Law Journal} is not tracked by EconLit. So all data for that journal is derived only from Scopus.}
+
+\subsection{Matching}
+
+There is considerable intersection between the Scopus and EconLit databases. However, Scopus generally represents a subset of the articles that are present in EconLit.\footnote{The notable exception to this is the \textit{Journal of Financial Economics}} Additionally, there are minor inconsistencies (punctuation, capitalization, etc.) between the ways the two parties record various fields of interest: title, author names, volume and issue numbers, etc. In order to assemble as complete a database of papers as possible we apply a fuzzy matching algorithm. First, articles that can be matched using only a modified title (coerced to all upper-case to eliminate capitalization inconsistencies), page-range, and volume and issues numbers are matched accordingly. This first step constitutes the ``naive'' match. For most journals of interest the naive match captures over 80\% of observations.\\
+
+Following the naive match, we construct a ``closeness'' score for every pair-wise combination of remaining, unmatched articles from Scopus and EconLit. This score includes an average of three different Levenshtein-distance metrics that measures the edit-distance (how different) between two strings; volume and issue numbers; and page ranges. After computing all pair-wise scores, a match is only identified both articles are symmetrically best. That is, a match is made if and only if an article (A) from Scopus has a best candidate-match with an article (B) from EconLit \textit{and} vice versa. This fuzzy-matching process usually reduces the remaining unmatched articles by 50\%. The results of this process, by journal, are presented in Table 2 and Figure 1\\
 
 \input{tables/output/scopus_econlit_matching_results_out.tex}
 
 \begin{figure}[h]
     \centering    
     \includegraphics[width=\textwidth]{figures/scopus_econlit_matching_results.png}
-    \caption{Caption text}
+    \caption{Results of the Scopus-EconLit Matching Process}
+\end{figure}
+
+Following this fuzzy matching process, some articles (mostly from) EconLit and Scopus remain unmatched. If necessary, we can choose to hand-match these remaining articles and/or keep them and attempt to infer additional variables of interest systematically or by hand. For example, we desire Scopus matches for EconLit observations because that allows us to identify the authors using the unique Scopus author ID. We desire the EconLit matches for Scopus observations because that provides us with JEL codes. It is possible to write an algorithm that tries to identify the best author-match in the Scopus database using the data already available in the EconLit database. Additionally, for the jouranls that provide them, it would be possible to collect JEL codes by hand.
+
+\subsection{Results}
+At present, we have over 24,000 unique paper observations from 16 journals over the period from 1990 to 2021. For most of these we have a ``balanced'' dataset that include the following variables:
+\begin{multicols}{2}
+    \begin{itemize}
+        \item Author(s) (and unique identifier)
+        \item Title (and unique identifier)
+        \item Publication Name (and ISSN)
+        \item Publication information (volume, issue, page-range, date)
+        \item Abstract
+        \item JEL codes (and descriptions)
+    \end{itemize}
+\end{multicols}
+
+\subsection{Classifying Papers}
+An outstanding challenge remains classifying the papers and their results. Doing this might be important because capture may be asymmetric. That is, consulting economists might censor particular \textit{kinds} of results because of the ramifications those results might have for their clients. For example, the professional sanction for writing a paper that finds consumer welfare benefits to market concentration might be considerably smaller (or non-existent) relative to writing a paper that finds that the same market concentration generates non-priced harms to consumers. This would lead to a bias in publication behavior that we have not yet developed a method for identifying.
+
+\section{Scholars \& Consultants Database}
+In addition to understanding the state of the literature (the response variable), we have built an early-stage dataset of authors and consultants (the explanatory variable). 
+
+\subsection{Scholars}
+Starting with all of the papers from the journal of interest collected from Scopus, we collect all of the associated authors. This is facilitated in large part because Scopus generates a unique author ID for each scholar. This facilitates joining papers to editors, placing scholars in co-authorship networks, and identifying consultants. As a possible extension of this dataset, we can use Scopus Author API to collect affiliation data for each scholar.\footnote{However, based on casual inspection, this appears to be inaccurate or not up to date.}
+
+\subsection{Consultants}
+We are particularly interested in the subset of scholars who are consultants --- and particularly those who serve as expert witnesses in antitrust litigation. However, selection and measurement bias are likely to play an outsized role in identifying consultants. We address each of these in turn.\\
+
+First we attempt to handle selection bias by developing a database on the basis of a characteristic that we think should be exogenous to consulting engagements. For this, we begin by identifying all scholars affiliated with at least one of a number of research programs with the National Bureau of Economic Research (NBER). Using the same justificationas we did for journal selection (``treatments'' and ``controls''), we identify all scholars affiliated with the Industrial Organization, Law and Economics, Corporate Finance, and Labor Studies programs.\\
+
+We then investigate each scholar to determine whether they are a consultant (or engage in consulting). There are four test we apply:
+\begin{enumerate}
+    \item We check the websites of major consulting firms, to see if the scholar of interest appears as a (active) consultant.\footnote{We consider Analysis Group, Bates White, Berkeley Research Group, the Brattle Group, Compass Lexecon, Charles River Associates, Cornerstone Research, Keystone, NERA, and Vega Economics as major firms for this step}. 
+    \item We identify the scholar's personal website and CV and determine whether it lists any consulting engagements. 
+    \item We construct a common Google search, ``[Scholar Name] expert witness/consulting'', and examine the first three pages of results to determine whether these results reveal any consulting engagements.
+    \item We read the disclosure statements made by these scholars in their NBER working papers to identify any consulting relationships/conflicts of interest.
+\end{enumerate}
+Deviations from this procedure are noted in the database. In addition to noting whether a scholar engages in consulting with a consulting firm, we also note if the scholar of interest has engaged in any consulting, paid work for, or data-sharing agreements with private firms.\\
+
+The challenge of measurement bias is also pertinent. Our methodology for identifying consultants is far from exhaustive and suffers from non-response problem. At present, there is not way segregate ``true negatives'' scholars who, in reality, do not consult from ``false negative'' scholars who do consult but do so sufficiently surreptitiously to evade our search methodology. This is an open challenge that could be resolved by gaining access to corporate or government/regulator data.
+
+\subsubsection{Disclosure}
+In addition to identifying whether a scholar consults, we also identify how and whether those scholars proactively disclose their potential conflicts of interest. To begin, we construct a naive index of transparency with scores of 0 being the most opaque and scores of 2 being the most transparency. A scholar's score increases by 1 point for disclosing conflicts of interest in their CV/website and/or their NBER working papers.\footnote{A scholar is coded as having declared their conflict of interest in their working papers if \textit{any} of their working papers disclose a conflict of interest.}. The results of this effort are presented in in Figures 2 (a) and (b).
+
+\begin{figure}[h]
+    \centering
+    \begin{subfigure}[h]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{figures/transparencyPlot.png}
+        \caption{All consultants}        
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[h]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{figures/transparencyByProgram.png}
+        \caption{By NBER Program}
+    \end{subfigure}
+    \caption{Disclosure Transparency Index}
+\end{figure}
+
+\input{tables/output/articles_per_author.tex}
+
+\subsubsection{Presence in Data}
+As part of a descriptive exercise, we are additionally interested in understanding how consultants participate in the publishing process. First, using their unique Scopus IDs we match all NBER affiliated scholars to our papers database (described above). We then identify an article as being a consultant-article if at least one of the authors is a consultant. We identify an article as being NBER-affiliated if at least one of the authors is a member of an NBER research program (but not a consultant). The results of this exercise are plotted in Figure 3.\\
+
+\begin{figure}[h]
+    \centering    
+    \includegraphics[width=\textwidth]{figures/consultants_nber_journal_share.png}
+    \caption{Consultants' Share of Publications}
+\end{figure}
+
+A cursory inspection suggests that consultants and NBER do not dominate the journals of interest. However, consider that our papers database contains over 18,000 unique authors. In fact, considering that the 344 NBER scholars and consultants make up just under 2\% of the observed authors, these scholars are incredibly productive. This result is also borne out in Table 3, which identifies the most productive authors in our database.\footnote{Similar rankings are available by field and journal in Appendix A.} Those with super-scripted symbols are consultants and are affiliated with corresponding NBER program.Though not all are consultants, \textit{all} of the top 11 most productive scholars are affiliated with the NBER. Again, Table 4 depicts what is plotted in Figure, the extraordinary productivity of NBER members.\\
+
+
+
+
+\input{tables/output/consultants_nber_journals_share_out.tex}
+
+
+\section{Editors Database}
+Also of interest is the role of editors in publishing. Editors have tacit powers to change the academic discourse by conditioning a paper's acceptance on certain changes, thereby emphasizing or understating certain conclusions. To begin investigating the role that editors play in attenuating or exacerbating academic capture, we begin creating a database of editors for each of our journals of interest.\footnote{This is still very much in progress.}. For each journal-calendar/volume-year we identify the composition of editorial staff, thereby allowing us to identify the tenure and position of each editor. To date, we have collected XXX unique editors. Below Figures 4, 5, and 6 plot the composition of editorial staff, the average tenure of editors, and the longest tenure of an editor, respectively, for a number of journals.\\
+
+Figures 7 and 8 plot the history of editors at the \textit{Journal of Labor Economics} and \textit{Journal of Political Economy}, respectively.
+
+\begin{figure}[h]
+    \centering    
+    \includegraphics[width=\textwidth]{figures/total_editors.png}
+    \caption{Results of the Scopus-EconLit Matching Process}
+\end{figure}
+\begin{figure}[h]
+    \centering    
+    \includegraphics[width=\textwidth]{figures/editors_avg_tenure.png}
+    \caption{Results of the Scopus-EconLit Matching Process}
+\end{figure}
+\begin{figure}[h]
+    \centering    
+    \includegraphics[width=\textwidth]{figures/editors_max_tenure.png}
+    \caption{Results of the Scopus-EconLit Matching Process}
 \end{figure}
 
 
-\newpage
-\begin{landscape}
-    \thispagestyle{empty}
-        \input{tables/output/most_published_authors_finance_labor.tex}
-\end{landscape}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{figures/editors_jle_history.png}
+    \caption{Editorial Composition of the \textit{Journal of Law and Economics} (1990-2020)}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{figures/editors_jpe_history.png}
+    \caption{Editorial Composition of the \textit{Journal of Political Economy} (2002-2020)}
+\end{figure}
+
+
+
+
+
+
+
+
+    
+\appendix
+\section{Author Rankings, by journal}
+
+
 \newpage
 \begin{landscape}
     \thispagestyle{empty}
@@ -89,24 +234,15 @@ Here is a change and another one!
 \newpage
 \begin{landscape}
     \thispagestyle{empty}
-    \vspace{\linewidth}
-    \newgeometry{margin=0.1in}
+        \input{tables/output/most_published_authors_finance_labor.tex}
+\end{landscape}
+\newpage
+\begin{landscape}
+    \thispagestyle{empty}
     \input{tables/output/most_published_authors_io_and_law.tex}
 \end{landscape}
     
 
-    
-
-\input{tables/output/articles_per_author.tex}
-
-
-
-
-
-\section{Consultants/Scholars Database}
-
-
-\section{Editors Database}
 
 
 \end{document}
